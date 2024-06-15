@@ -13,6 +13,10 @@ var sprites = {
 	}
 }
 
+func get_building_at(tile_map, location):
+	if tiles.has([tile_map, location]):
+		return tiles[[tile_map, location]]
+
 func create_building(building_pattern, tile_map, location):
 	for tile in building_pattern["tiles"]:
 		if tiles.has(location+tile["position"]):
@@ -32,7 +36,7 @@ func create_building(building_pattern, tile_map, location):
 			sprite_node.scale = Vector2(sprite["scale"],sprite["scale"])
 			tile_map.add_child(sprite_node)
 			sprite_node.position = tile_to_world_position(tile_map, location+tile["position"]) + Vector2(sprite["offset_x"], sprite["offset_y"])
-		tiles[location+tile["position"]] = building
+		tiles[[tile_map, location+tile["position"]]] = building
 	buildings.push_back(building)
 	
 func tile_to_world_position(tile_map, tile_pos):

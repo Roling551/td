@@ -8,3 +8,4 @@ func set_icon(icon_texture):
 	
 func set_text(text):
 	label.text = text
+

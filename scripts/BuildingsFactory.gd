@@ -10,7 +10,8 @@ func get_buildings_patterns(main_script):
 				{"position": Vector2i(0,-1)}
 			],
 			"components": {
-				"resources" : func(): return ResourcesComponent.new(main_script.resources_container)
+				"resources" : func(): return ResourcesComponent.new(main_script.resources_container),
+				"population": func(): return PopulationComponent.new(),
 			}
 		}
 	]
