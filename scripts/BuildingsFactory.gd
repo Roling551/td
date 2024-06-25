@@ -11,7 +11,7 @@ func get_buildings_patterns(main_script):
 			],
 			"components": {
 				"resources" : func(): return ResourcesComponent.new(main_script.resources_container),
-				"population": func(): return PopulationComponent.new(),
+				"population": func(): return PopulationComponent.new(main_script.population_container),
 			}
 		}
 	]

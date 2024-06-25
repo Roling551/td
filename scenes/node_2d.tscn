@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d186rrr47lyfw"]
+[gd_scene load_steps=9 format=3 uid="uid://d186rrr47lyfw"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_qaqhi"]
 [ext_resource type="Texture2D" uid="uid://dsou7ljdrjpfg" path="res://sprites/ground.png" id="2_hwf8a"]
 [ext_resource type="Script" path="res://scripts/ResourcesContainer.gd" id="3_84qfj"]
 [ext_resource type="Script" path="res://scripts/PopulationContainer.gd" id="4_1cowe"]
+[ext_resource type="Script" path="res://TimeContainer.gd" id="5_4l5ov"]
 [ext_resource type="Script" path="res://scripts/DevActions.gd" id="5_x1imp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5avdr"]
@@ -19,10 +20,11 @@ custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_5avdr")
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("resources_container", "population_container", "active_panel")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("resources_container", "population_container", "time_container", "active_panel")]
 script = ExtResource("1_qaqhi")
 resources_container = NodePath("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/ResourcesContainer")
 population_container = NodePath("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/PopulationContainer")
+time_container = NodePath("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/TimeContainer")
 active_panel = NodePath("CanvasLayer/VBoxContainer/BottomPanel/Panel")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -71,6 +73,11 @@ script = ExtResource("3_84qfj")
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("4_1cowe")
+
+[node name="TimeContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_4l5ov")
 
 [node name="MiddlePart" type="Control" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2

@@ -6,11 +6,14 @@ extends VBoxContainer
 var actions = {
 	"Increase population": func(): change_population(10),
 	"Decrease population": func(): change_population(-10),
+	"Add building": func(): main.main_ui.set_action(add_building_action)
 }
 
 func change_population(change):
 	main.population_container.change_population(change)
-	main.population_container.assign_population(main.buildings_list.buildings)
+
+func add_building_action(tile_map, tile_position):
+	main.buildings_list.create_building(main.buildings_patterns[0], tile_map, tile_position)
 
 func _ready():
 	for action_name in actions:
