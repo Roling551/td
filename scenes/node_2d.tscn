@@ -69,15 +69,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_84qfj")
 
-[node name="PopulationContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("4_1cowe")
-
 [node name="TimeContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_4l5ov")
+
+[node name="PopulationContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("4_1cowe")
 
 [node name="MiddlePart" type="Control" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2

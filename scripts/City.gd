@@ -4,13 +4,17 @@ class_name City
 var population_container
 
 var label
-var assigned_population = 0
+var assigned_population = []
 
 func _init(_population_container):
 	population_container = _population_container
 	
+func reset_population():
+	assigned_population = []
+	
 func assign_population(population):
-	assigned_population = population
+	assigned_population.append_array(population)
 
 func action():
-	population_container.change_rest(0.1, assigned_population)
+	for citizen in assigned_population:
+		citizen.change_rest(0.1)
