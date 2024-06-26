@@ -16,7 +16,7 @@ func has_ui():
 
 func action():
 	for citizen in assigned_population:
-		citizen.change_rest(-0.1)
+		citizen.work(1.0)
 
 func activate_ui(container_):
 	container = container_

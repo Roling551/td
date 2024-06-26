@@ -26,6 +26,7 @@ func _physics_process(delta):
 		population_container.assign_population(buildings_list.buildings, city)
 	buildings_list.building_actions()
 	city.action()
+	population_container.citizens_action()
 	resources_container.update()
 	population_container.update()
 	main_ui.update_ui()

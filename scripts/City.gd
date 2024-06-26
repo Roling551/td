@@ -17,4 +17,4 @@ func assign_population(population):
 
 func action():
 	for citizen in assigned_population:
-		citizen.change_rest(0.1)
+		citizen.rest(1.0)

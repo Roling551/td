@@ -32,7 +32,7 @@ func _ready():
 
 func update():
 	population_item.set_text(str(population.size()))
-	working_item.set_text(str(working_population.size() - unemployed_population.size()))
+	working_item.set_text(str(working_population.size()))
 	rest_item.set_text(str(resting_population.size()))
 	unemployed_item.set_text(str(unemployed_population.size()))
 
@@ -40,13 +40,23 @@ func change_population(population_change):
 	if population_change>0:
 		for i in population_change:
 			population.append(Citizen.new())
-			
+						
+func working_pay(civilian):
+	civilian.feed(0.1)
+	
+func unemployed_pay(civilian):
+	civilian.feed(0.02)
+
+func citizens_action():
+	for citizen in population:
+		citizen.action()
+
 func assign_population(buildings, city):
 	working_population = []
 	resting_population = []
 	unemployed_population = []
 	for citizen in population:
-		if citizen.rest > 0.5:
+		if citizen.want_to_work():
 			working_population.append(citizen)
 		else:
 			resting_population.append(citizen)
@@ -59,6 +69,7 @@ func assign_population(buildings, city):
 			needed_workers_num += building.building_components["population"].max_population
 	if working_population.size() >= needed_workers_num:
 		unemployed_population = working_population.slice(needed_workers_num)
+		working_population = working_population.slice(0, needed_workers_num)
 		var assigned_population_num = 0
 		for building in buildings:
 			if building.building_components.has("population"):
@@ -82,4 +93,8 @@ func assign_population(buildings, city):
 				assigned_population_num += 1
 	city.assign_population(resting_population)
 	city.assign_population(unemployed_population)
+	for citizen in working_population:
+		working_pay(citizen)
+	for citizen in unemployed_population:
+		unemployed_pay(citizen)
 		
