@@ -52,12 +52,13 @@ func citizens_action():
 		citizen.action()
 
 func assign_population(buildings, city):
+	var population_wanting_work = []
 	working_population = []
 	resting_population = []
 	unemployed_population = []
 	for citizen in population:
 		if citizen.want_to_work():
-			working_population.append(citizen)
+			population_wanting_work.append(citizen)
 		else:
 			resting_population.append(citizen)
 	
@@ -66,31 +67,22 @@ func assign_population(buildings, city):
 	for building in buildings:
 		if building.building_components.has("population"):
 			building.building_components["population"].reset_population()
-			needed_workers_num += building.building_components["population"].max_population
-	if working_population.size() >= needed_workers_num:
-		unemployed_population = working_population.slice(needed_workers_num)
-		working_population = working_population.slice(0, needed_workers_num)
-		var assigned_population_num = 0
-		for building in buildings:
-			if building.building_components.has("population"):
-				var population_component = building.building_components["population"]
-				var population_to_assign = working_population.slice(assigned_population_num, assigned_population_num+population_component.max_population)
-				population_component.assign_population(population_to_assign)
-				assigned_population_num += population_component.max_population
-	else:
-		var assigned_population_num = 0
-		for building in buildings:
-			if building.building_components.has("population"):
-				var population_component = building.building_components["population"]
-				var population_to_assign_num = floor(working_population.size() * population_component.max_population / needed_workers_num)
-				population_component.assign_population(working_population.slice(assigned_population_num, assigned_population_num+population_to_assign_num))
-				assigned_population_num += population_to_assign_num
-		for building in buildings:
-			if building.building_components.has("population"):
-				if assigned_population_num == working_population.size():
-					break
-				building.building_components["population"].assign_population(working_population.slice(assigned_population_num, assigned_population_num+1))
-				assigned_population_num += 1
+
+	Util.divide_into_requesters(
+		population_wanting_work,
+		working_population,
+		unemployed_population,
+		buildings,
+		func(requester): 
+			if requester.building_components.has("population"):
+				return requester.building_components["population"].max_population
+			else:
+				return 0,
+		func(requester, to_assign):
+			if requester.building_components.has("population"):
+				requester.building_components["population"].assign_population(to_assign)
+	)
+
 	city.assign_population(resting_population)
 	city.assign_population(unemployed_population)
 	for citizen in working_population:
