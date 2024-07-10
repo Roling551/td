@@ -7,7 +7,7 @@ static func setAnchorFullRect(control: Control):
 	control.anchor_top = 0
 	control.anchor_bottom = 1
 
-static func divide_into_requesters(
+static func divide_list_into_requesters(
 	array_to_divide,
 	divided_elements,
 	left_out_array,
@@ -38,3 +38,33 @@ static func divide_into_requesters(
 				break
 			assign_request.call(requester, array_to_divide.slice(assigned_num, assigned_num+1))
 			assigned_num += 1
+
+static func divide_resource_proportianlly_to_request(
+	resource_amount,
+	requesters,
+	get_requested_amount,
+	assign_request
+):
+	var whole_needed_amount = 0
+	for requester in requesters:
+		whole_needed_amount += get_requested_amount.call(requester)
+	if whole_needed_amount > resource_amount:
+		for requester in requesters:
+			assign_request.call(requester, get_requested_amount.call(requester)*resource_amount/whole_needed_amount)
+		return 0
+	else:
+		for requester in requesters:
+			assign_request.call(requester, get_requested_amount.call(requester))
+		return resource_amount - whole_needed_amount
+	
+static func get_avg(
+	array,
+	get_amount
+):
+	if array.size() == 0:
+		return 0
+	var sum = 0
+	for item in array:
+		sum += get_amount.call(item)
+	return sum / array.size()
+	

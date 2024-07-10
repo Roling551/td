@@ -74,10 +74,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_4l5ov")
 
-[node name="PopulationContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer"]
+[node name="PopulationContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer" node_paths=PackedStringArray("resource_container")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("4_1cowe")
+resource_container = NodePath("../ResourcesContainer")
 
 [node name="MiddlePart" type="Control" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2

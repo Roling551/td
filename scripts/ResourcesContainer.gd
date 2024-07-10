@@ -1,8 +1,13 @@
 extends VFlowContainer
+class_name ResourcesContainer
 
 @onready var resource_item_prototype = preload("res://scenes/resource_item.tscn")
 
 var resource_types = [
+	{
+		"name": "food",
+		"sprite": preload("res://sprites/resource_sprites/food.png")
+	},
 	{
 		"name": "wood",
 		"sprite": preload("res://sprites/resource_sprites/wood.png")
@@ -27,7 +32,12 @@ func _ready():
 func update():
 	for item in resource_items:
 		resource_items[item].set_text(str(snapped(resources[item],0.1)))
-		
+
 func change_resource(resource, change):
 	resources[resource] += change
 
+func get_resource(resource):
+	if resources.has(resource):
+		return resources[resource]
+	else:
+		return 0.0
