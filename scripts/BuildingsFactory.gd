@@ -10,14 +10,16 @@ func get_buildings_patterns(main_script):
 				{"position": Vector2i(0,-1)}
 			],
 			"components": {
+				"population": func(building): return PopulationComponent.new(main_script.population_container),
+				"productivity": func(building): return ProductivityComponent.new(building),
 				"resources" : 
-					func(): 
+					func(building): 
 						return ResourcesComponent.new(
+							building,
 							main_script.resources_container,
-							func():
-								main_script.resources_container.change_resource("food", 0.02)
+							func(productivity):
+								main_script.resources_container.change_resource("food", 0.02*productivity)
 						),
-				"population": func(): return PopulationComponent.new(main_script.population_container),
 			}
 		}
 	]

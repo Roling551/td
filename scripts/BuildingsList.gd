@@ -23,10 +23,9 @@ func create_building(building_pattern, tile_map, location):
 			return
 
 	var components = {}
-	for component_name in building_pattern["components"]:
-		components[component_name] = building_pattern["components"][component_name].call()
-
 	var building = Building.new(components)
+	for component_name in building_pattern["components"]:
+		components[component_name] = building_pattern["components"][component_name].call(building)
 
 	for tile in building_pattern["tiles"]:
 		if tile.has("sprite"):
