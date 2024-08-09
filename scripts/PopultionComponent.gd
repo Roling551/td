@@ -6,7 +6,8 @@ var population_container
 var container
 var label
 var max_population = 10
-var assigned_population = []
+var assigned_group_parts = {}
+var assigned_population_num = 0
 
 func _init(_population_container):
 	population_container = _population_container
@@ -15,8 +16,7 @@ func has_ui():
 	return true
 
 func action():
-	for citizen in assigned_population:
-		citizen.work(1.0)
+	pass
 
 func activate_ui(container_):
 	container = container_
@@ -28,13 +28,25 @@ func activate_ui(container_):
 	c.add_child(label)
 
 func update_ui():
-	label.text = str(assigned_population.size(),"/",max_population)
+	label.text = str(assigned_population_num,"/",max_population)
+
+func set_assigned_population_num():
+	var population_num = 0
+	for group in assigned_group_parts:
+		population_num += assigned_group_parts[group].population
+	assigned_population_num = population_num
 
 func get_wanted_population():
 	return max_population
 
 func reset_population():
-	assigned_population = []
+	assigned_group_parts = {}
+	set_assigned_population_num()
 
-func assign_population(population):
-	assigned_population.append_array(population)
+func assign_population(group_part):
+	var group = group_part
+	if assigned_group_parts.has(group):
+		assigned_group_parts[group].add(group_part)
+	else:
+		assigned_group_parts[group] = group_part
+	set_assigned_population_num()

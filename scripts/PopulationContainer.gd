@@ -10,43 +10,28 @@ class_name PopulationContainer
 @onready var bed_sprite = preload("res://sprites/resource_sprites/bed.png")
 @onready var stomach_sprite = preload("res://sprites/resource_sprites/stomach.png")
 
-var population = []
-var working_population = []
-var resting_population = []
-var unemployed_population = []
+var citizen_groups = {}
 
 var resource_items = {}
 
 func _ready():
-	create_resource_item("population", population_sprite, func():return population.size())
-	create_resource_item("working", working_sprite, func():return working_population.size())
-	create_resource_item("rest", bed_sprite, func():return resting_population.size())
-	create_resource_item("unemployed", unemployed_sprite, func():return unemployed_population.size())
-	create_resource_item("satiety", stomach_sprite, func():return Util.get_avg(population, func(citizen): return citizen.needs["satiety"]))
+	citizen_groups["settlers"] = Group.new(20)
+	resource_items[name] =  ControlUtil.create_resource_item(self, population_sprite, func():
+		return str(citizen_groups["settlers"].population, " (", citizen_groups["settlers"].avaliable_population, ")")
+	)
 	update()
 
 func update():
 	for item in resource_items:
-		resource_items[item][0].set_text(str(resource_items[item][1].call()))
-
-func create_resource_item(name, sprite, update_method):
-	var resource_item = resource_item_prototype.instantiate()
-	add_child(resource_item)
-	resource_item.set_icon(sprite)
-	resource_items[name] = [resource_item, update_method]
-	return resource_item
+		resource_items[item].update()
 
 func change_population(population_change):
-	if population_change>0:
-		for i in population_change:
-			population.append(Citizen.new())
+	citizen_groups["settlers"].change_population(population_change)
 
 func citizens_action():
-	for citizen in population:
-		citizen.action()
+	pass
+	#for citizen in population:
+	#	citizen.action()
 
-func assign_population(buildings, city):
-	AssignResourcesToPopulation.basic_assign(self, resource_container)
-	AssignPopulationAlgorithms.assign_equally(population, working_population, resting_population, unemployed_population, buildings, city)
-	
-		
+func assign_population(buildings):
+	AssignPopulationAlgorithms.assign_equally(self, resource_container, buildings)

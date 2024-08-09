@@ -15,4 +15,4 @@ func action():
 	productivity = calculate_productivity()
 
 func calculate_productivity():
-	return float(population_component.assigned_population.size()) / population_component.max_population
+	return float(population_component.assigned_population_num) / population_component.max_population
