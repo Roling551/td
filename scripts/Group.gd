@@ -5,6 +5,7 @@ var population
 var avaliable_population
 
 var needs = {}
+var needs_capacity = {}
 var needs_state = {}
 
 func _init(_population):

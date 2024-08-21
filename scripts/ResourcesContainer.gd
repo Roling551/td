@@ -4,15 +4,15 @@ class_name ResourcesContainer
 var resource_types = [
 	{
 		"name": "food",
-		"sprite": preload("res://sprites/resource_sprites/food.png")
+		"sprite": "food_sprite"
 	},
 	{
 		"name": "wood",
-		"sprite": preload("res://sprites/resource_sprites/wood.png")
+		"sprite": "wood_sprite"
 	},
 	{
 		"name": "stone",
-		"sprite": preload("res://sprites/resource_sprites/stone.png")
+		"sprite": "stone_sprite"
 	}
 ]
 

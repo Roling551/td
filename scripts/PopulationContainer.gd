@@ -3,20 +3,13 @@ class_name PopulationContainer
 
 @export var resource_container: Node
 
-@onready var resource_item_prototype = preload("res://scenes/resource_item.tscn")
-@onready var population_sprite = preload("res://sprites/resource_sprites/rat.png")
-@onready var working_sprite = preload("res://sprites/resource_sprites/working.png")
-@onready var unemployed_sprite = preload("res://sprites/resource_sprites/unemployed.png")
-@onready var bed_sprite = preload("res://sprites/resource_sprites/bed.png")
-@onready var stomach_sprite = preload("res://sprites/resource_sprites/stomach.png")
-
 var citizen_groups = {}
 
 var resource_items = {}
 
 func _ready():
 	citizen_groups["settlers"] = Group.new(20)
-	resource_items[name] =  ControlUtil.create_resource_item(self, population_sprite, func():
+	resource_items[name] =  ControlUtil.create_resource_item(self, "population_sprite", func():
 		return str(citizen_groups["settlers"].population, " (", citizen_groups["settlers"].avaliable_population, ")")
 	)
 	update()

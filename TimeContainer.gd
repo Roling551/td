@@ -1,8 +1,5 @@
 extends VFlowContainer
 
-@onready var time_sprite = preload("res://sprites/resource_sprites/time.png")
-@onready var date_sprite = preload("res://sprites/resource_sprites/date.png")
-
 var time_item
 var date_item
 
@@ -11,9 +8,9 @@ var time = 1
 var day = 1
 
 func _ready():
-	time_item = ControlUtil.create_resource_item(self, time_sprite, func():return str(time))
+	time_item = ControlUtil.create_resource_item(self, "time_sprite", func():return str(time))
 	
-	date_item = ControlUtil.create_resource_item(self, date_sprite, func():return str(day))
+	date_item = ControlUtil.create_resource_item(self, "date_sprite", func():return str(day))
 	update()
 
 func update():
