@@ -20,11 +20,17 @@ func _ready():
 	add_building(tile_map, Vector2i(2,1))
 	add_building(tile_map, Vector2i(3,1))
 
-func _physics_process(delta):
-	if time_container.proceed_frame():
-		population_container.assign_population(buildings_list.buildings)
+func turn():
+	time_container.proceed_turn()
+	population_container.assign_population(buildings_list.buildings)
 	buildings_list.building_actions()
 	population_container.citizens_action()
+	update()
+	
+func update():
 	resources_container.update()
 	population_container.update()
-	main_ui.update_ui()
+	main_ui.update_ui()	
+
+func _physics_process(delta):
+	pass

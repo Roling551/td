@@ -20,6 +20,7 @@ func update():
 
 func change_population(population_change):
 	citizen_groups["settlers"].change_population(population_change)
+	update()
 
 func citizens_action():
 	pass

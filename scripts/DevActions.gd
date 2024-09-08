@@ -4,6 +4,7 @@ extends VBoxContainer
 @onready var main = get_tree().root.get_node("Main")
 
 var actions = {
+	"Turn": func(): main.turn(),
 	"Increase population": func(): change_population(10),
 	"Decrease population": func(): change_population(-10),
 	"Add building": func(): main.main_ui.set_action(add_building_action)

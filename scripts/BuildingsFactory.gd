@@ -18,7 +18,7 @@ func get_buildings_patterns(main_script):
 							building,
 							main_script.resources_container,
 							func(productivity):
-								main_script.resources_container.change_resource("food", 0.02*productivity)
+								main_script.resources_container.change_resource("food", 2*productivity)
 						),
 			}
 		}
