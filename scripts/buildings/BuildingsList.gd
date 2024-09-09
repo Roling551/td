@@ -10,16 +10,28 @@ var sprites = {
 		"scale": 0.5,
 		"offset_x": 0,
 		"offset_y": -16
+	},
+	"input": {
+		"texture": preload("res://sprites/building_sprites/input.png"),
+		"scale": 0.5,
+		"offset_x": 0,
+		"offset_y": 0
+	},
+	"output": {
+		"texture": preload("res://sprites/building_sprites/output.png"),
+		"scale": 0.5,
+		"offset_x": 0,
+		"offset_y": 0
 	}
 }
 
 func get_building_at(tile_map, location):
 	if tiles.has([tile_map, location]):
-		return tiles[[tile_map, location]]
+		return tiles[[tile_map, location]].building
 
 func create_building(building_pattern, tile_map, location):
 	for tile in building_pattern["tiles"]:
-		if tiles.has(location+tile["position"]):
+		if tiles.has([tile_map, location+tile["position"]]):
 			return
 
 	var components = {}
@@ -35,7 +47,7 @@ func create_building(building_pattern, tile_map, location):
 			sprite_node.scale = Vector2(sprite["scale"],sprite["scale"])
 			tile_map.add_child(sprite_node)
 			sprite_node.position = tile_to_world_position(tile_map, location+tile["position"]) + Vector2(sprite["offset_x"], sprite["offset_y"])
-		tiles[[tile_map, location+tile["position"]]] = building
+		tiles[[tile_map, location+tile["position"]]] = BuildingTileFactory.get_tile(tile.get("type"), building)
 	buildings.push_back(building)
 	
 func tile_to_world_position(tile_map, tile_pos):

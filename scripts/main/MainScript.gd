@@ -16,9 +16,8 @@ func add_building(tile_map, tile_position):
 
 func _ready():
 	add_child(main_ui)
+
 	add_building(tile_map, Vector2i(1,1))
-	add_building(tile_map, Vector2i(2,1))
-	add_building(tile_map, Vector2i(3,1))
 
 func turn():
 	time_container.proceed_turn()
