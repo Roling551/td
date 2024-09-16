@@ -7,17 +7,20 @@ extends Node2D
 @export var population_container : Node
 @export var time_container : Node
 @export var active_panel : Node
-@onready var buildings_patterns = BuildingsFactory.new().get_buildings_patterns(self)
+@onready var building_factory = BuildingsFactory.new(self)
+#@onready var buildings_patterns = building_factory.get_buildings_patterns()
 @onready var buildings_list = BuildingsList.new()
 @onready var main_ui = MainUI.new(self)
 
-func add_building(tile_map, tile_position):
-	buildings_list.create_building(buildings_patterns[0], tile_map, tile_position)
+func add_building(tile_map, tile_position, type):
+	buildings_list.add_building(building_factory.get_building_and_tiles(type), tile_map, tile_position)
 
 func _ready():
 	add_child(main_ui)
 
-	add_building(tile_map, Vector2i(1,1))
+	add_building(tile_map, Vector2i(-3,1), "provider")
+	add_building(tile_map, Vector2i(0,1), "transformer")
+	add_building(tile_map, Vector2i(3,1), "consumer")
 
 func turn():
 	time_container.proceed_turn()

@@ -15,7 +15,7 @@ func change_population(change):
 	main.population_container.change_population(change)
 
 func add_building_action(tile_map, tile_position):
-	main.buildings_list.create_building(main.buildings_patterns[0], tile_map, tile_position)
+	main.add_building("transformer",tile_map, tile_position)
 
 func set_add_connection_action():
 	main.main_ui.set_2_point_action(
@@ -27,7 +27,8 @@ func set_add_connection_action():
 		func(first_value, tile_map, tile_position):
 			var second_value = main.buildings_list.tiles.get([tile_map, tile_position])
 			if second_value != null && BuildingTile.can_tiles_connect(first_value, second_value):
-				print("Connection")
+				first_value.connect_tile(second_value)
+				second_value.connect_tile(first_value)
 	)
 
 func _ready():

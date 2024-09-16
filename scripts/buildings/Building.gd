@@ -2,6 +2,7 @@ extends Node2D
 class_name Building
 
 var building_components
+var functionalities = {}
 var active_panel
 var item_list
 
@@ -9,8 +10,8 @@ func _init(building_components_):
 	building_components = building_components_
 
 func action():
-	for name in building_components:
-		building_components[name].action()
+	if(functionalities.has("turn_action")):
+		functionalities["turn_action"].call()
 
 func activate_ui(active_panel_):
 	active_panel = active_panel_
