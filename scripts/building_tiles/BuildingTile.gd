@@ -15,3 +15,6 @@ static func is_tile_connectable(tile):
 
 static func can_tiles_connect(tile_1, tile_2):
 	return (tile_1.tile_type == TILE_TYPE.INPUT && tile_2.tile_type == TILE_TYPE.OUTPUT) || (tile_2.tile_type == TILE_TYPE.INPUT && tile_1.tile_type == TILE_TYPE.OUTPUT)
+
+static func is_tile_input(tile):
+	return tile.tile_type == TILE_TYPE.INPUT

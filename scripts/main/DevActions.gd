@@ -24,11 +24,12 @@ func set_add_connection_action():
 			return tile != null && BuildingTile.is_tile_connectable(tile),
 		func(tile_map, tile_position):
 			return main.buildings_list.tiles.get([tile_map, tile_position]),
-		func(first_value, tile_map, tile_position):
+		func(first_value, first_tile_map, first_tile_position, tile_map, tile_position):
 			var second_value = main.buildings_list.tiles.get([tile_map, tile_position])
 			if second_value != null && BuildingTile.can_tiles_connect(first_value, second_value):
 				first_value.connect_tile(second_value)
 				second_value.connect_tile(first_value)
+				main.connections_list.add_connetion(first_value, first_tile_map, first_tile_position, second_value, tile_map, tile_position)
 	)
 
 func _ready():

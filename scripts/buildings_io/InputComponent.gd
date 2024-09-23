@@ -1,4 +1,4 @@
-extends Node
+extends BuildingComponent
 class_name InputComponent
 
 var building

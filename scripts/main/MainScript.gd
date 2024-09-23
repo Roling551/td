@@ -10,17 +10,18 @@ extends Node2D
 @onready var building_factory = BuildingsFactory.new(self)
 #@onready var buildings_patterns = building_factory.get_buildings_patterns()
 @onready var buildings_list = BuildingsList.new()
+@onready var connections_list = ConnectionsList.new()
 @onready var main_ui = MainUI.new(self)
 
-func add_building(tile_map, tile_position, type):
+func add_building(type, tile_map, tile_position):
 	buildings_list.add_building(building_factory.get_building_and_tiles(type), tile_map, tile_position)
 
 func _ready():
 	add_child(main_ui)
 
-	add_building(tile_map, Vector2i(-3,1), "provider")
-	add_building(tile_map, Vector2i(0,1), "transformer")
-	add_building(tile_map, Vector2i(3,1), "consumer")
+	add_building("provider", tile_map, Vector2i(-3,1))
+	add_building("transformer", tile_map, Vector2i(0,1))
+	add_building("consumer", tile_map, Vector2i(3,1))
 
 func turn():
 	time_container.proceed_turn()

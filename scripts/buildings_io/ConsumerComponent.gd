@@ -1,4 +1,4 @@
-extends Node
+extends BuildingComponent
 class_name ConsumerComponent
 
 var building

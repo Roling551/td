@@ -1,2 +1,2 @@
-extends Node
+extends BuildingComponent
 class_name OutputComponent
