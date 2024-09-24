@@ -13,3 +13,6 @@ func forward(_payload):
 
 func connect_tile(_output_tile):
 	pass
+
+func unconnect():
+	pass

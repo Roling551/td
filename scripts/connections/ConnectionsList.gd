@@ -26,6 +26,21 @@ func _add_connection_sorted(tile_o, tile_map_o, location_o, tile_i, tile_map_i, 
 	var length = sqrt(pow(location_o.x-location_i.x,2) + pow(location_o.y-location_i.y,2))
 	sprite_node.region_rect = Rect2(0,0,64 * length,64)
 	sprite_node.rotation = position_o.direction_to(position_i).angle()
+	
+	var connection = Connection.new(sprite_node, tile_o, [tile_map_o, location_o], tile_i, [tile_map_i, location_i])
+	connections[[tile_map_o, location_o]] = connection
+	connections[[tile_map_i, location_i]] = connection
+
+func delete_connection(tile_map, tile_location):
+	var connection: Connection = connections.get([tile_map, tile_location])
+	if connection == null:
+		return	
+	tile_map.remove_child(connection.sprite)
+	connection.sprite.queue_free()
+	connection.input.unconnect()
+	connection.output.unconnect()
+	connections.erase(connection.input_location)
+	connections.erase(connection.output_location)
 
 func tile_to_world_position(tile_map, tile_pos):
 	return tile_map.map_to_local(tile_pos) + tile_map.global_position

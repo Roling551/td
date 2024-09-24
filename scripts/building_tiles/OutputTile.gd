@@ -10,6 +10,9 @@ func _init(building):
 func connect_tile(_input_tile):
 	input_tile = _input_tile
 	
+func unconnect():
+	input_tile = null
+	
 func forward(payload):
 	if input_tile != null:
 		input_tile.forward(payload)

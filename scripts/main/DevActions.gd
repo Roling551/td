@@ -8,7 +8,8 @@ var actions = {
 	"Increase population": func(): change_population(10),
 	"Decrease population": func(): change_population(-10),
 	"Add building": func(): main.main_ui.set_action(add_building_action),
-	"Add connection": func(): set_add_connection_action();
+	"Add connection": func(): set_add_connection_action(),
+	"Delete connection": func(): main.main_ui.set_action(delete_connection_action)
 }
 
 func change_population(change):
@@ -16,6 +17,9 @@ func change_population(change):
 
 func add_building_action(tile_map, tile_position):
 	main.add_building("transformer",tile_map, tile_position)
+
+func delete_connection_action(tile_map, tile_position):
+	main.connections_list.delete_connection(tile_map, tile_position)
 
 func set_add_connection_action():
 	main.main_ui.set_2_point_action(
