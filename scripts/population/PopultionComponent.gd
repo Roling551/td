@@ -20,9 +20,7 @@ func action():
 
 func activate_ui(container_):
 	container = container_
-	var c = Control.new()
-	c.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	c.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var c = ControlUtil.get_expanded_control()
 	container.add_child(c)
 	label = Label.new()
 	c.add_child(label)

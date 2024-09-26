@@ -9,3 +9,9 @@ static func create_resource_item(obj, sprite_name, update_method):
 	resource_item._set_icon(Sprites.sprites[sprite_name])
 	resource_item._set_update_method(update_method)
 	return resource_item
+
+static func get_expanded_control():
+	var c = Control.new()
+	c.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	c.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	return c

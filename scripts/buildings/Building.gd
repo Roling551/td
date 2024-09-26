@@ -3,7 +3,6 @@ class_name Building
 
 var building_components
 var functionalities = {}
-var active_panel
 var item_list
 
 func _init(building_components_):
@@ -13,8 +12,7 @@ func action():
 	if(functionalities.has("turn_action")):
 		functionalities["turn_action"].call()
 
-func activate_ui(active_panel_):
-	active_panel = active_panel_
+func activate_ui(active_panel):
 	item_list = HBoxContainer.new()
 	Util.setAnchorFullRect(item_list)
 	
@@ -27,9 +25,9 @@ func activate_ui(active_panel_):
 	update_ui()
 	
 func deactivate_ui():
-	item_list.queue_free()
-	item_list = null
-	active_panel = null
+	if item_list:
+		item_list.queue_free()
+		item_list = null
 	
 func update_ui():
 	for name in building_components:

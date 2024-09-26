@@ -19,11 +19,11 @@ var default_action = func(tile_map, tile_position):
 	var building = main.buildings_list.get_building_at(tile_map, tile_position)
 	change_ui(building)
 
-func set_action(action):
+func set_action(action, ui = null):
 	main.tile_map_actions.set_click_function(action)
 	if active_ui:
 		active_ui.deactivate_ui()
-		active_ui = null
+	change_ui(ui)
 
 func set_2_point_action(first_click_condition, get_first_value, action):
 	
@@ -35,9 +35,9 @@ func set_2_point_action(first_click_condition, get_first_value, action):
 					action.call(first_value, tile_map_1, tile_position_1, tile_map_2, tile_position_2)
 					main.tile_map_actions.set_click_function(default_action)
 			)
-	
+
 	main.tile_map_actions.set_click_function(click_1)
-	
+
 	if active_ui:
 		active_ui.deactivate_ui()
 		active_ui = null

@@ -7,9 +7,9 @@ var actions = {
 	"Turn": func(): main.turn(),
 	"Increase population": func(): change_population(10),
 	"Decrease population": func(): change_population(-10),
-	"Add building": func(): main.main_ui.set_action(add_building_action),
+	"Add building": func(): main.main_ui.set_action(add_building_action, LabelUiElement.new("Add building")),
 	"Add connection": func(): set_add_connection_action(),
-	"Delete connection": func(): main.main_ui.set_action(delete_connection_action)
+	"Delete connection": func(): main.main_ui.set_action(delete_connection_action, LabelUiElement.new("Delete connection"))
 }
 
 func change_population(change):
