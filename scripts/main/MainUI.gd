@@ -25,22 +25,20 @@ func set_action(action, ui = null):
 		active_ui.deactivate_ui()
 	change_ui(ui)
 
-func set_2_point_action(first_click_condition, get_first_value, action):
-	
-	var click_1 = func(tile_map_1, tile_position_1):
+func _get_2_point_action_function(first_click_condition, get_first_value, action):
+	return func(tile_map_1, tile_position_1):
 		if first_click_condition.call(tile_map_1, tile_position_1):
 			var first_value = get_first_value.call(tile_map_1, tile_position_1)
 			main.tile_map_actions.set_click_function(
 				func(tile_map_2, tile_position_2):
 					action.call(first_value, tile_map_1, tile_position_1, tile_map_2, tile_position_2)
-					main.tile_map_actions.set_click_function(default_action)
+					main.tile_map_actions.set_click_function(_get_2_point_action_function(first_click_condition, get_first_value, action))
 			)
 
-	main.tile_map_actions.set_click_function(click_1)
 
-	if active_ui:
-		active_ui.deactivate_ui()
-		active_ui = null
+func set_2_point_action(first_click_condition, get_first_value, action, ui = null):
+	change_ui(ui)
+	main.tile_map_actions.set_click_function(_get_2_point_action_function(first_click_condition, get_first_value, action))
 
 func change_ui(new_ui):
 	if active_ui==new_ui:
