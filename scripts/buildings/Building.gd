@@ -1,12 +1,18 @@
 extends Node2D
 class_name Building
 
+var location
 var building_components
 var functionalities = {}
 var item_list
+var tiles
 
 func _init(building_components_):
 	building_components = building_components_
+
+func set_location_and_tiles(_location, _tiles):
+	tiles = _tiles
+	location = _location
 
 func action():
 	if(functionalities.has("turn_action")):
