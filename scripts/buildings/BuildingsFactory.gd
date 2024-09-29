@@ -96,8 +96,7 @@ func get_building_and_tiles(type):
 		components["input"] = InputComponent.new(building, inputs)
 	
 	if type=="transformer" || type=="provider":
-		#components["output"] = OutputComponent.new()
-		pass
+		components["output"] = OutputComponent.new(building, outputs)
 
 	if type=="transformer":
 		components["transformer"] = TransformerComponent.new(building, inputs[0], outputs[0])

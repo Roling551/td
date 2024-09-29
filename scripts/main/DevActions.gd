@@ -35,8 +35,6 @@ func set_add_connection_action():
 		func(first_value, first_tile_map, first_tile_position, tile_map, tile_position):
 			var second_value = main.buildings_list.tiles.get([tile_map, tile_position])
 			if second_value != null && BuildingTile.can_tiles_connect(first_value, second_value):
-				first_value.connect_tile(second_value)
-				second_value.connect_tile(first_value)
 				main.connections_list.add_connetion(first_value, first_tile_map, first_tile_position, second_value, tile_map, tile_position),
 		LabelUiElement.new("Add connection")
 	)

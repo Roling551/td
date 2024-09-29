@@ -9,8 +9,8 @@ extends Node2D
 @export var active_panel : Node
 @onready var building_factory = BuildingsFactory.new(self)
 #@onready var buildings_patterns = building_factory.get_buildings_patterns()
-@onready var buildings_list = BuildingsList.new()
-@onready var connections_list = ConnectionsList.new()
+@onready var buildings_list = BuildingsList.new(self)
+@onready var connections_list = ConnectionsList.new(self)
 @onready var main_ui = MainUI.new(self)
 
 func add_building(type, tile_map, tile_position):

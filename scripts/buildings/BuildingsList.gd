@@ -1,8 +1,12 @@
 extends Node2D
 class_name BuildingsList
 
+var main
 var tiles = {}
 var buildings = {}
+
+func _init(_main):
+	main = _main
 
 func get_building_at(tile_map, location):
 	if tiles.has([tile_map, location]):
@@ -32,12 +36,20 @@ func add_building(building_and_tiles, tile_map, location):
 
 func delete_building(tile_map, location):
 	var selected_tile = tiles.get([tile_map, location])
-	if selected_tile:
-		var building = selected_tile.building
-		buildings[building].queue_free()
-		buildings.erase(building)
-		for tile_position in selected_tile.building.tiles:
-			tiles.erase([tile_map, building.location+tile_position[1]])
+	if !selected_tile:
+		return
+	var building = selected_tile.building
+	
+	buildings[building].queue_free()
+	buildings.erase(building)
+	if building.building_components.has("input"):
+		for tile in building.building_components["input"].inputs:
+			main.connections_list.delete_tiles_connection(tile)
+	if building.building_components.has("output"):
+		for tile in building.building_components["output"].outputs:
+			main.connections_list.delete_tiles_connection(tile)
+	for tile_position in building.tiles:
+		tiles.erase([tile_map, building.location+tile_position[1]])
 
 func tile_to_world_position(tile_map, tile_pos):
 	return tile_map.map_to_local(tile_pos) + tile_map.global_position
