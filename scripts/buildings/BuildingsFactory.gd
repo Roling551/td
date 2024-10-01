@@ -5,6 +5,10 @@ var main_script
 
 func _init(_main_script):
 	main_script = _main_script
+	for pattern in buildings_patterns:
+		for tile in buildings_patterns[pattern]["tiles"]:	
+			if tile.has("sprite_name"):
+				tile["sprite"]=sprites[tile["sprite_name"]]
 
 var sprites = {
 	"chimney1": {
@@ -31,10 +35,10 @@ var buildings_patterns = {
 		"transformer":{
 			"name": "t1",
 			"tiles": [
-				{"position": Vector2i(0,0), "sprite":"chimney1"},
+				{"position": Vector2i(0,0), "sprite_name":"chimney1"},
 				{"position": Vector2i(0,-1)},
-				{"position": Vector2i(1,0), "sprite":"input", "type":BuildingTile.TILE_TYPE.INPUT},
-				{"position": Vector2i(1,-1), "sprite":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
+				{"position": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
+				{"position": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
 				"population": func(building): return PopulationComponent.new(main_script.population_container),
@@ -44,9 +48,9 @@ var buildings_patterns = {
 		"provider":{
 			"name": "t1",
 			"tiles": [
-				{"position": Vector2i(0,0), "sprite":"chimney1"},
+				{"position": Vector2i(0,0), "sprite_name":"chimney1"},
 				{"position": Vector2i(0,-1)},
-				{"position": Vector2i(1,-1), "sprite":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
+				{"position": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
 				"population": func(building): return PopulationComponent.new(main_script.population_container),
@@ -56,9 +60,9 @@ var buildings_patterns = {
 		"consumer":{
 			"name": "t1",
 			"tiles": [
-				{"position": Vector2i(0,0), "sprite":"chimney1"},
+				{"position": Vector2i(0,0), "sprite_name":"chimney1"},
 				{"position": Vector2i(0,-1)},
-				{"position": Vector2i(1,0), "sprite":"input", "type":BuildingTile.TILE_TYPE.INPUT},
+				{"position": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
 			],
 			"components": {
 				"population": func(building): return PopulationComponent.new(main_script.population_container),
@@ -88,7 +92,7 @@ func get_building_and_tiles(type):
 			inputs.append(tile_instance)
 		
 		if tile.has("sprite"):
-			result_tile["sprite"]=sprites[tile["sprite"]]
+			result_tile["sprite"]=tile["sprite"]
 		result_tile["position"]=tile["position"]
 		tiles.push_back(result_tile)
 	

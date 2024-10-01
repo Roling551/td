@@ -4,6 +4,8 @@ class_name TileMapActions
 @onready var camera = get_node("../Camera2D")
 
 var click_function
+var hover_tile_function
+var hover_position
 
 func _init(_camera):
 	camera = _camera
@@ -14,6 +16,13 @@ func handle_click(tile_map, mouse_input_event):
 			var tile_pos = get_tile_position(tile_map)
 			click_function.call(tile_map, tile_pos)
 
+func handle_mouse_moved(tile_map, mouse_input_event):
+	var tile_position = get_tile_position(tile_map)
+	if hover_position != tile_position:
+		hover_position = tile_position
+		if hover_tile_function:
+			hover_tile_function.call(tile_map, hover_position)
+
 func tile_to_world_position(tile_map, tile_pos):
 	return tile_map.map_to_local(tile_pos) + tile_map.global_position
 	
@@ -22,3 +31,6 @@ func get_tile_position(tile_map):
 
 func set_click_function(function_):
 	click_function = function_
+
+func set_hover_tile_function(function_):
+	hover_tile_function = function_

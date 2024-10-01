@@ -12,6 +12,23 @@ func get_building_at(tile_map, location):
 	if tiles.has([tile_map, location]):
 		return tiles[[tile_map, location]].building
 
+func get_building_sprite(pattern, tile_map):
+	var building_node = Node2D.new()
+	for tile in pattern.tiles:
+		if tile.has("sprite"):
+			var sprite = tile["sprite"]
+			var sprite_node = Sprite2D.new()
+			sprite_node.texture = sprite["texture"]
+			sprite_node.scale = Vector2(sprite["scale"],sprite["scale"])
+			building_node.add_child(sprite_node)
+			sprite_node.position = tile_to_world_position(tile_map, tile["position"]) + Vector2(sprite["offset_x"], sprite["offset_y"])
+	return building_node
+
+func place_node(node, tile_map, location):
+	if !node.get_parent():
+		tile_map.add_child(node)
+	node.position = tile_to_world_position(tile_map, location) + Vector2(-16,-16)
+
 func add_building(building_and_tiles, tile_map, location):
 	for tile in building_and_tiles["tiles"]:
 		if tiles.has([tile_map, location+tile["position"]]):

@@ -7,7 +7,7 @@ var actions = {
 	"Turn": func(): main.turn(),
 	"Increase population": func(): change_population(10),
 	"Decrease population": func(): change_population(-10),
-	"Add building": func(): main.main_ui.set_action(add_building_action, LabelUiElement.new("Add building")),
+	"Add building": func(): set_add_building_action(),
 	"Delete building": func(): main.main_ui.set_action(delete_building_action, LabelUiElement.new("Delete building")),
 	"Add connection": func(): set_add_connection_action(),
 	"Delete connection": func(): main.main_ui.set_action(delete_connection_action, LabelUiElement.new("Delete connection"))
@@ -16,8 +16,23 @@ var actions = {
 func change_population(change):
 	main.population_container.change_population(change)
 
-func add_building_action(tile_map, tile_position):
-	main.add_building("transformer",tile_map, tile_position)
+func set_add_building_action():
+	var type = "transformer"
+	main.main_ui.set_action(
+		func(tile_map, tile_position):
+			main.add_building(type,tile_map, tile_position),
+		LabelUiElement.new("Add building")
+	)
+	var pattern = main.building_factory.buildings_patterns.get(type)
+	var sprite_node = main.buildings_list.get_building_sprite(pattern, main.tile_map)
+	main.main_ui.set_hover_tile_function(
+		func(tile_map, tile_position):
+			main.buildings_list.place_node(sprite_node, tile_map, tile_position)
+	)
+	main.main_ui.set_deselect_action_function(
+		func():
+			sprite_node.queue_free()
+	)
 
 func delete_building_action(tile_map, tile_position):
 	main.buildings_list.delete_building(tile_map, tile_position)
