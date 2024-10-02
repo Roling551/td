@@ -25,7 +25,13 @@ func get_building_sprite(pattern, tile_map):
 	return building_node
 
 func place_node(node, tile_map, location):
-	if !node.get_parent():
+	var parent = node.get_parent()
+	if tile_map == parent:
+		pass
+	elif parent == null:
+		tile_map.add_child(node)
+	else:
+		parent.remove_child(node)
 		tile_map.add_child(node)
 	node.position = tile_to_world_position(tile_map, location) + Vector2(-16,-16)
 

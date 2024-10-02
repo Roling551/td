@@ -6,6 +6,7 @@ class_name TileMapActions
 var click_function
 var hover_tile_function
 var hover_position
+var hover_tile_map
 
 func _init(_camera):
 	camera = _camera
@@ -18,8 +19,9 @@ func handle_click(tile_map, mouse_input_event):
 
 func handle_mouse_moved(tile_map, mouse_input_event):
 	var tile_position = get_tile_position(tile_map)
-	if hover_position != tile_position:
+	if hover_position != tile_position || hover_tile_map != tile_map:
 		hover_position = tile_position
+		hover_tile_map = tile_map
 		if hover_tile_function:
 			hover_tile_function.call(tile_map, hover_position)
 
