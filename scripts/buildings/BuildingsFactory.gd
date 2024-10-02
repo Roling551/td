@@ -35,10 +35,10 @@ var buildings_patterns = {
 		"transformer":{
 			"name": "t1",
 			"tiles": [
-				{"position": Vector2i(0,0), "sprite_name":"chimney1"},
-				{"position": Vector2i(0,-1)},
-				{"position": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
-				{"position": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
+				{"tile_coord": Vector2i(0,0), "sprite_name":"chimney1"},
+				{"tile_coord": Vector2i(0,-1)},
+				{"tile_coord": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
+				{"tile_coord": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
 				"population": func(building): return PopulationComponent.new(main_script.population_container),
@@ -48,9 +48,9 @@ var buildings_patterns = {
 		"provider":{
 			"name": "t1",
 			"tiles": [
-				{"position": Vector2i(0,0), "sprite_name":"chimney1"},
-				{"position": Vector2i(0,-1)},
-				{"position": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
+				{"tile_coord": Vector2i(0,0), "sprite_name":"chimney1"},
+				{"tile_coord": Vector2i(0,-1)},
+				{"tile_coord": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
 				"population": func(building): return PopulationComponent.new(main_script.population_container),
@@ -60,9 +60,9 @@ var buildings_patterns = {
 		"consumer":{
 			"name": "t1",
 			"tiles": [
-				{"position": Vector2i(0,0), "sprite_name":"chimney1"},
-				{"position": Vector2i(0,-1)},
-				{"position": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
+				{"tile_coord": Vector2i(0,0), "sprite_name":"chimney1"},
+				{"tile_coord": Vector2i(0,-1)},
+				{"tile_coord": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
 			],
 			"components": {
 				"population": func(building): return PopulationComponent.new(main_script.population_container),
@@ -93,7 +93,7 @@ func get_building_and_tiles(type):
 		
 		if tile.has("sprite"):
 			result_tile["sprite"]=tile["sprite"]
-		result_tile["position"]=tile["position"]
+		result_tile["tile_coord"]=tile["tile_coord"]
 		tiles.push_back(result_tile)
 	
 	if type=="transformer" || type=="consumer":

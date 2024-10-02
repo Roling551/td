@@ -8,9 +8,9 @@ var buildings = {}
 func _init(_main):
 	main = _main
 
-func get_building_at(tile_map, location):
-	if tiles.has([tile_map, location]):
-		return tiles[[tile_map, location]].building
+func get_building_at(tile_map, tile_coord):
+	if tiles.has([tile_map, tile_coord]):
+		return tiles[[tile_map, tile_coord]].building
 
 func get_building_sprite(pattern, tile_map):
 	var building_node = Node2D.new()
@@ -21,10 +21,10 @@ func get_building_sprite(pattern, tile_map):
 			sprite_node.texture = sprite["texture"]
 			sprite_node.scale = Vector2(sprite["scale"],sprite["scale"])
 			building_node.add_child(sprite_node)
-			sprite_node.position = tile_to_world_position(tile_map, tile["position"]) + Vector2(sprite["offset_x"], sprite["offset_y"])
+			sprite_node.position = tile_to_world_position(tile_map, tile["tile_coord"]) + Vector2(sprite["offset_x"], sprite["offset_y"])
 	return building_node
 
-func place_node(node, tile_map, location):
+func place_node(node, tile_map, tile_coord):
 	var parent = node.get_parent()
 	if tile_map == parent:
 		pass
@@ -33,16 +33,16 @@ func place_node(node, tile_map, location):
 	else:
 		parent.remove_child(node)
 		tile_map.add_child(node)
-	node.position = tile_to_world_position(tile_map, location) + Vector2(-16,-16)
+	node.position = tile_to_world_position(tile_map, tile_coord) + Vector2(-16,-16)
 
-func add_building(building_and_tiles, tile_map, location):
+func add_building(building_and_tiles, tile_map, tile_coord):
 	for tile in building_and_tiles["tiles"]:
-		if tiles.has([tile_map, location+tile["position"]]):
+		if tiles.has([tile_map, tile_coord+tile["tile_coord"]]):
 			return
 
 	var building_node = Node2D.new()
 	tile_map.add_child(building_node)
-	building_node.position = tile_to_world_position(tile_map, location) + Vector2(-16,-16)
+	building_node.position = tile_to_world_position(tile_map, tile_coord) + Vector2(-16,-16)
 	var building_tiles = {}
 	for tile in building_and_tiles["tiles"]:
 		if tile.has("sprite"):
@@ -51,14 +51,14 @@ func add_building(building_and_tiles, tile_map, location):
 			sprite_node.texture = sprite["texture"]
 			sprite_node.scale = Vector2(sprite["scale"],sprite["scale"])
 			building_node.add_child(sprite_node)
-			sprite_node.position = tile_to_world_position(tile_map, tile["position"]) + Vector2(sprite["offset_x"], sprite["offset_y"])
-		tiles[[tile_map, location+tile["position"]]] = tile["tile"]
-		building_tiles[[tile_map, tile["position"]]] = tile["tile"]
+			sprite_node.position = tile_to_world_position(tile_map, tile["tile_coord"]) + Vector2(sprite["offset_x"], sprite["offset_y"])
+		tiles[[tile_map, tile_coord+tile["tile_coord"]]] = tile["tile"]
+		building_tiles[[tile_map, tile["tile_coord"]]] = tile["tile"]
 	buildings[building_and_tiles["building"]] = building_node
-	building_and_tiles["building"].set_location_and_tiles(location, building_tiles)
+	building_and_tiles["building"].set_location_and_tiles([tile_map, tile_coord], building_tiles)
 
-func delete_building(tile_map, location):
-	var selected_tile = tiles.get([tile_map, location])
+func delete_building(tile_map, tile_coord):
+	var selected_tile = tiles.get([tile_map, tile_coord])
 	if !selected_tile:
 		return
 	var building = selected_tile.building
@@ -71,8 +71,8 @@ func delete_building(tile_map, location):
 	if building.building_components.has("output"):
 		for tile in building.building_components["output"].outputs:
 			main.connections_list.delete_tiles_connection(tile)
-	for tile_position in building.tiles:
-		tiles.erase([tile_map, building.location+tile_position[1]])
+	for tile_location in building.tiles:
+		tiles.erase([tile_map, building.location[1]+tile_location[1]])
 
 func tile_to_world_position(tile_map, tile_pos):
 	return tile_map.map_to_local(tile_pos) + tile_map.global_position

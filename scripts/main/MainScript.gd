@@ -12,8 +12,8 @@ extends Node2D
 @onready var connections_list = ConnectionsList.new(self)
 @onready var main_ui = MainUI.new(self)
 
-func add_building(type, tile_map, tile_position):
-	buildings_list.add_building(building_factory.get_building_and_tiles(type), tile_map, tile_position)
+func add_building(type, tile_map, tile_coord):
+	buildings_list.add_building(building_factory.get_building_and_tiles(type), tile_map, tile_coord)
 
 func _ready():
 	add_child(main_ui)

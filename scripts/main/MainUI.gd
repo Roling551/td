@@ -35,8 +35,8 @@ func set_action(action, ui = null):
 	if ui:
 		change_ui(ui)
 		
-var default_action = func(tile_map, tile_position):
-	var building = main.buildings_list.get_building_at(tile_map, tile_position)
+var default_action = func(tile_map, tile_coord):
+	var building = main.buildings_list.get_building_at(tile_map, tile_coord)
 	change_ui(building)
 
 func change_ui(new_ui):
@@ -56,14 +56,15 @@ func set_hover_tile_function(hover_action):
 	main.tile_map_actions.set_hover_tile_function(hover_action)
 
 func _get_2_point_action_function(first_click_condition, get_first_value, action):
-	return func(tile_map_1, tile_position_1):
-		if first_click_condition.call(tile_map_1, tile_position_1):
-			var first_value = get_first_value.call(tile_map_1, tile_position_1)
+	return func(tile_map_1, tile_coord_1):
+		if first_click_condition.call(tile_map_1, tile_coord_1):
+			var first_value = get_first_value.call(tile_map_1, tile_coord_1)
 			main.tile_map_actions.set_click_function(
-				func(tile_map_2, tile_position_2):
-					action.call(first_value, tile_map_1, tile_position_1, tile_map_2, tile_position_2)
+				func(tile_map_2, tile_coord_2):
+					action.call(first_value, tile_map_1, tile_coord_1, tile_map_2, tile_coord_2)
 					main.tile_map_actions.set_click_function(_get_2_point_action_function(first_click_condition, get_first_value, action))
 			)
 func set_2_point_action(first_click_condition, get_first_value, action, ui = null):
-	change_ui(ui)
+	deselect_action()
 	main.tile_map_actions.set_click_function(_get_2_point_action_function(first_click_condition, get_first_value, action))
+	change_ui(ui)
