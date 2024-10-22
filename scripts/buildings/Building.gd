@@ -18,7 +18,7 @@ func action():
 	if(functionalities.has("turn_action")):
 		functionalities["turn_action"].call()
 
-func activate_ui(active_panel):
+func get_ui():
 	item_list = HBoxContainer.new()
 	Util.setAnchorFullRect(item_list)
 	
@@ -27,9 +27,9 @@ func activate_ui(active_panel):
 		if component.has_ui():
 			component.activate_ui(item_list)
 	
-	active_panel.add_child(item_list)
 	update_ui()
-	
+	return item_list
+
 func deactivate_ui():
 	if item_list:
 		item_list.queue_free()

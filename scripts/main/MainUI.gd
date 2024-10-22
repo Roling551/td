@@ -37,19 +37,19 @@ func set_action(action, ui = null):
 		
 var default_action = func(tile_map, tile_coord):
 	var building = main.buildings_list.get_building_at(tile_map, tile_coord)
-	change_ui(building)
+	change_ui(building.get_ui() if building else null)
 
 func change_ui(new_ui):
 	if active_ui==new_ui:
 		return
 	if active_ui:
-		active_ui.deactivate_ui()
+		active_ui.queue_free()
 	if new_ui:
-		new_ui.activate_ui(main.active_panel)
+		main.active_panel.add_child(new_ui)
 	active_ui = new_ui
 
 func update_ui():
-	if active_ui:
+	if active_ui && ("update_ui" in active_ui):
 		active_ui.update_ui()
 
 func set_hover_tile_function(hover_action):
