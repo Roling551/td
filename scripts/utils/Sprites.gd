@@ -1,8 +1,6 @@
 extends Node
 class_name Sprites
 
-
-
 const sprites = {
 	#resoures
 	"population_sprite": preload("res://sprites/resource_sprites/rat.png"),

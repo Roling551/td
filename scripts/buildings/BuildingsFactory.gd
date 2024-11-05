@@ -120,8 +120,3 @@ func get_building_and_tiles(type):
 		"building": building,
 		"tiles": tiles
 	}
-
-
-
-
-

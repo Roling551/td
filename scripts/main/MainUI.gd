@@ -48,10 +48,6 @@ func change_ui(new_ui):
 		main.active_panel.add_child(new_ui)
 	active_ui = new_ui
 
-func update_ui():
-	if active_ui && ("update_ui" in active_ui):
-		active_ui.update_ui()
-
 func set_hover_tile_function(hover_action):
 	main.tile_map_actions.set_hover_tile_function(hover_action)
 

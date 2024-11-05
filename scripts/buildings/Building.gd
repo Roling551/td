@@ -29,11 +29,6 @@ func get_ui():
 	
 	update_ui()
 	return item_list
-
-func deactivate_ui():
-	if item_list:
-		item_list.queue_free()
-		item_list = null
 	
 func update_ui():
 	for name in building_components:
