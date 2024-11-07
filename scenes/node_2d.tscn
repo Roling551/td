@@ -20,12 +20,8 @@ custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_5avdr")
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("resources_container", "population_container", "time_container", "active_panel")]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_w0nsv")
-resources_container = NodePath("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/ResourcesContainer")
-population_container = NodePath("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/PopulationContainer")
-time_container = NodePath("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/TimeContainer")
-active_panel = NodePath("CanvasLayer/VBoxContainer/BottomPanel/Panel")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_4mo7v")

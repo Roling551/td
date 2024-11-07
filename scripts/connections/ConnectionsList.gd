@@ -1,11 +1,7 @@
 extends Node
 class_name ConnectionsList
 
-var main
 var connections = {}
-
-func _init(_main):
-	main = _main
 
 func add_connetion(tile_1, tile_map_1, tile_coord_1, tile_2, tile_map_2, tile_coord_2):
 	if BuildingTile.is_tile_input(tile_1):
@@ -50,7 +46,7 @@ func delete_tiles_connection(tile):
 	
 
 func delete_connection(tile_map, tile_coord):
-	var tile = main.buildings_list.tiles.get([tile_map, tile_coord])
+	var tile = MainScript.buildings_list.tiles.get([tile_map, tile_coord])
 	delete_tiles_connection(tile)
 
 func tile_to_world_position(tile_map, tile_pos):

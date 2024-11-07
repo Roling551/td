@@ -1,22 +1,33 @@
 extends Node2D
 class_name MainScript
 
-@onready var tile_map = get_node("TileMap")
-@onready var camera = get_node("Camera2D")
-@onready var tile_map_actions = TileMapActions.new(camera)
-@export var resources_container : Node
-@export var population_container : Node
-@export var time_container : Node
-@export var active_panel : Node
-@onready var building_factory = BuildingsFactory.new(self)
-@onready var buildings_list = BuildingsList.new(self)
-@onready var connections_list = ConnectionsList.new(self)
-@onready var main_ui = MainUI.new(self)
+static var resources_container : Node
+static var population_container : Node
+static var time_container : Node
+static var active_panel : Node
+static var tile_map
+static var camera
+static var tile_map_actions
+static var building_factory
+static var buildings_list = BuildingsList.new()
+static var connections_list
+static var main_ui
 static var update_ui = UpdateUI.new()
 
 func add_building(type, tile_map, tile_coord):
 	buildings_list.add_building(building_factory.get_building_and_tiles(type), tile_map, tile_coord)
 func _ready():
+	active_panel =  get_node("CanvasLayer/VBoxContainer/BottomPanel/Panel")
+	tile_map = get_node("TileMap")
+	camera = get_node("Camera2D")
+	resources_container = get_node("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/ResourcesContainer")
+	population_container = get_node("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/PopulationContainer")
+	time_container =  get_node("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/TimeContainer")
+	tile_map_actions = TileMapActions.new(camera)
+	building_factory = BuildingsFactory.new()
+	connections_list = ConnectionsList.new()
+	main_ui = MainUI.new()
+
 	add_child(main_ui)
 	add_child(update_ui)
 	

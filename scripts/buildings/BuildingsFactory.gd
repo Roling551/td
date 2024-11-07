@@ -1,10 +1,7 @@
 extends Node
 class_name BuildingsFactory
 
-var main_script
-
-func _init(_main_script):
-	main_script = _main_script
+func _init():
 	for pattern in buildings_patterns:
 		for tile in buildings_patterns[pattern]["tiles"]:	
 			if tile.has("sprite_name"):
@@ -41,7 +38,7 @@ var buildings_patterns = {
 				{"tile_coord": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(main_script.population_container),
+				"population": func(building): return PopulationComponent.new(MainScript.population_container),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
@@ -53,7 +50,7 @@ var buildings_patterns = {
 				{"tile_coord": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(main_script.population_container),
+				"population": func(building): return PopulationComponent.new(MainScript.population_container),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
@@ -65,7 +62,7 @@ var buildings_patterns = {
 				{"tile_coord": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(main_script.population_container),
+				"population": func(building): return PopulationComponent.new(MainScript.population_container),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},

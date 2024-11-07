@@ -1,12 +1,10 @@
 extends Node2D
 class_name BuildingsList
 
-var main
+
 var tiles = {}
 var buildings = {}
 
-func _init(_main):
-	main = _main
 
 func get_building_at(tile_map, tile_coord):
 	if tiles.has([tile_map, tile_coord]):
@@ -67,10 +65,10 @@ func delete_building(tile_map, tile_coord):
 	buildings.erase(building)
 	if building.building_components.has("input"):
 		for tile in building.building_components["input"].inputs:
-			main.connections_list.delete_tiles_connection(tile)
+			MainScript.connections_list.delete_tiles_connection(tile)
 	if building.building_components.has("output"):
 		for tile in building.building_components["output"].outputs:
-			main.connections_list.delete_tiles_connection(tile)
+			MainScript.connections_list.delete_tiles_connection(tile)
 	for tile_location in building.tiles:
 		tiles.erase([tile_map, building.location[1]+tile_location[1]])
 
