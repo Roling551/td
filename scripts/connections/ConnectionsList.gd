@@ -46,7 +46,7 @@ func delete_tiles_connection(tile):
 	
 
 func delete_connection(tile_map, tile_coord):
-	var tile = MainScript.buildings_list.tiles.get([tile_map, tile_coord])
+	var tile = MainScript.buildings_map.tiles.get([tile_map, tile_coord])
 	delete_tiles_connection(tile)
 
 func tile_to_world_position(tile_map, tile_pos):

@@ -20,16 +20,14 @@ func action():
 
 func get_ui():
 	item_list = HBoxContainer.new()
-	Util.setAnchorFullRect(item_list)
-	
+	ControlUtil.set_anchor_full_rect(item_list)
 	for name in building_components:
 		var component = building_components[name]
 		if component.has_ui():
 			component.activate_ui(item_list)
-	
 	update_ui()
 	return item_list
-	
+
 func update_ui():
 	for name in building_components:
 		var component = building_components[name]

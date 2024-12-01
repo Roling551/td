@@ -18,3 +18,15 @@ static func get_expanded_control():
 static func expand_control(control): 
 	control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	control.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+static func set_anchor_full_rect(control: Control):
+	control.anchor_left = 0
+	control.anchor_right = 1
+	control.anchor_top = 0
+	control.anchor_bottom = 1
+
+static func get_go_and_back(name, go_back_to, panel):
+	var go_back_panel = GoBackPanel.new(panel, go_back_to)
+	var go_to_button = GoToButton.new(name,  go_back_panel)
+	return go_to_button
+	

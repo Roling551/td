@@ -34,7 +34,7 @@ func set_action(action, ui = null):
 		change_ui(ui)
 		
 var default_action = func(tile_map, tile_coord):
-	var building = MainScript.buildings_list.get_building_at(tile_map, tile_coord)
+	var building = MainScript.buildings_map.get_building_at(tile_map, tile_coord)
 	change_ui(building.get_ui() if building else null)
 
 func change_ui(new_ui):

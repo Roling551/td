@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://d186rrr47lyfw"]
+[gd_scene load_steps=8 format=3 uid="uid://d186rrr47lyfw"]
 
 [ext_resource type="Script" path="res://scripts/main/MainScript.gd" id="1_w0nsv"]
 [ext_resource type="Texture2D" uid="uid://dsou7ljdrjpfg" path="res://sprites/ground.png" id="2_hwf8a"]
 [ext_resource type="Script" path="res://scripts/resources/ResourcesContainer.gd" id="3_w1hks"]
 [ext_resource type="Script" path="res://TimeContainer.gd" id="5_4l5ov"]
 [ext_resource type="Script" path="res://scripts/population/PopulationContainer.gd" id="5_x05rl"]
-[ext_resource type="Script" path="res://scripts/main/DevActions.gd" id="6_mw87j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5avdr"]
 texture = ExtResource("2_hwf8a")
@@ -82,22 +81,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer/MiddlePart"]
+[node name="LeftPanel" type="Panel" parent="CanvasLayer/VBoxContainer/MiddlePart"]
 custom_minimum_size = Vector2(165, 0)
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
-
-[node name="DevActions" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/MiddlePart/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 2
-script = ExtResource("6_mw87j")
 
 [node name="BottomPanel" type="Control" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)

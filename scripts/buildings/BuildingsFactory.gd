@@ -117,3 +117,24 @@ func get_building_and_tiles(type):
 		"building": building,
 		"tiles": tiles
 	}
+	
+func get_building_sprite(pattern, tile_map):
+	var building_node = Node2D.new()
+	for tile in pattern.tiles:
+		if tile.has("sprite"):
+			var sprite = tile["sprite"]
+			var sprite_node = Sprite2D.new()
+			sprite_node.texture = sprite["texture"]
+			sprite_node.scale = Vector2(sprite["scale"],sprite["scale"])
+			building_node.add_child(sprite_node)
+			sprite_node.position = MainScript.buildings_map.tile_to_world_position(tile_map, tile["tile_coord"]) + Vector2(sprite["offset_x"], sprite["offset_y"])
+	return building_node
+
+func get_pre_build_info(type):
+	var pattern = buildings_patterns.get(type)
+	var pre_build_info = PreBuildInfo.new(
+		func(): return get_building_and_tiles(type),
+		pattern,
+		func(): return get_building_sprite(pattern, MainScript.tile_map)
+	)
+	return pre_build_info
