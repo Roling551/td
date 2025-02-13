@@ -3,7 +3,9 @@ class_name BuildingsMap
 
 const sprite_node_prefab = preload("res://scenes/sprite_node.tscn")
 
+#maps coordinates to a tile
 var tiles = {}
+#maps building to a building node
 var buildings = {}
 
 func get_building_at(tile_map, tile_coord):
@@ -26,16 +28,11 @@ func add_building(building_and_tiles, tile_map, tile_coord):
 		if tiles.has([tile_map, tile_coord+tile["tile_coord"]]):
 			return
 
-	var building_node = Node3D.new()
+	var building_node = BuildingSpriteNode.new(building_and_tiles["tiles"])
 	tile_map.add_child(building_node)
 	building_node.position = ControlUtil.tile_to_world(tile_coord)
 	var building_tiles = {}
 	for tile in building_and_tiles["tiles"]:
-		if tile.has("sprite_name"):
-			var sprite_node = sprite_node_prefab.instantiate()
-			building_node.add_child(sprite_node)
-			sprite_node.position = ControlUtil.tile_to_world(tile["tile_coord"]) + Sprites.sprites_3d[tile["sprite_name"]]["offset"]
-			sprite_node.set_material(tile["sprite_name"])
 		tiles[[tile_map, tile_coord+tile["tile_coord"]]] = tile["tile"]
 		building_tiles[[tile_map, tile["tile_coord"]]] = tile["tile"]
 	buildings[building_and_tiles["building"]] = building_node
@@ -60,4 +57,5 @@ func delete_building(tile_map, tile_coord):
 
 func building_actions():
 	for building in buildings:
+		print(building)
 		building.action()
