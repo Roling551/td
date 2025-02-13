@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvt728qrfomao"]
+
+[ext_resource type="Material" uid="uid://cclrg02a1liqg" path="res://base_material.tres" id="1_6axqq"]
+[ext_resource type="Script" path="res://scripts/SpriteNode.gd" id="2_sg3oo"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_fl0ar"]
+material = ExtResource("1_6axqq")
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_fl0ar")
+script = ExtResource("2_sg3oo")

@@ -1,5 +1,7 @@
-extends Node2D
+extends Node3D
 class_name BuildingsMap
+
+const sprite_node_prefab = preload("res://scenes/sprite_node.tscn")
 
 var tiles = {}
 var buildings = {}
@@ -17,25 +19,23 @@ func place_node(node, tile_map, tile_coord):
 	else:
 		parent.remove_child(node)
 		tile_map.add_child(node)
-	node.position = tile_to_world_position(tile_map, tile_coord) + Vector2(-16,-16)
+	node.position = ControlUtil.tile_to_world(tile_coord)
 
 func add_building(building_and_tiles, tile_map, tile_coord):
 	for tile in building_and_tiles["tiles"]:
 		if tiles.has([tile_map, tile_coord+tile["tile_coord"]]):
 			return
 
-	var building_node = Node2D.new()
+	var building_node = Node3D.new()
 	tile_map.add_child(building_node)
-	building_node.position = tile_to_world_position(tile_map, tile_coord) + Vector2(-16,-16)
+	building_node.position = ControlUtil.tile_to_world(tile_coord)
 	var building_tiles = {}
 	for tile in building_and_tiles["tiles"]:
-		if tile.has("sprite"):
-			var sprite = tile["sprite"]
-			var sprite_node = Sprite2D.new()
-			sprite_node.texture = sprite["texture"]
-			sprite_node.scale = Vector2(sprite["scale"],sprite["scale"])
+		if tile.has("sprite_name"):
+			var sprite_node = sprite_node_prefab.instantiate()
 			building_node.add_child(sprite_node)
-			sprite_node.position = tile_to_world_position(tile_map, tile["tile_coord"]) + Vector2(sprite["offset_x"], sprite["offset_y"])
+			sprite_node.position = ControlUtil.tile_to_world(tile["tile_coord"]) + Sprites.sprites_3d[tile["sprite_name"]]["offset"]
+			sprite_node.set_material(tile["sprite_name"])
 		tiles[[tile_map, tile_coord+tile["tile_coord"]]] = tile["tile"]
 		building_tiles[[tile_map, tile["tile_coord"]]] = tile["tile"]
 	buildings[building_and_tiles["building"]] = building_node
@@ -57,9 +57,6 @@ func delete_building(tile_map, tile_coord):
 			MainScript.connections_list.delete_tiles_connection(tile)
 	for tile_location in building.tiles:
 		tiles.erase([tile_map, building.location[1]+tile_location[1]])
-
-func tile_to_world_position(tile_map, tile_pos):
-	return tile_map.map_to_local(tile_pos) + tile_map.global_position
 
 func building_actions():
 	for building in buildings:

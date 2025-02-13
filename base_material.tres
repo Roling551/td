@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cclrg02a1liqg"]
+
+[ext_resource type="Texture2D" uid="uid://d2b0jldpfokdn" path="res://sprites/building_sprites/chimney1.png" id="1_coe4n"]
+
+[resource]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_coe4n")

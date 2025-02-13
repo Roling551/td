@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name MainScript
 
 static var resources_container : Node
@@ -17,17 +17,17 @@ static var update_ui = UpdateUI.new()
 static var dev_actions
 
 func _ready():
-	active_panel =  get_node("CanvasLayer/VBoxContainer/BottomPanel/Panel")
-	tile_map = get_node("TileMap")
-	camera = get_node("Camera2D")
-	resources_container = get_node("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/ResourcesContainer")
-	population_container = get_node("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/PopulationContainer")
-	time_container = get_node("CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/TimeContainer")
+	active_panel = get_node("../CanvasLayer/VBoxContainer/BottomPanel/Panel")
+	tile_map = get_node("../TileMap")
+	camera = get_node("../Camera")
+	resources_container = get_node("../CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/ResourcesContainer")
+	population_container = get_node("../CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/PopulationContainer")
+	time_container = get_node("../CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/TimeContainer")
 	tile_map_actions = TileMapActions.new(camera)
 	building_factory = BuildingsFactory.new()
 	connections_list = ConnectionsList.new()
 	main_ui = MainUI.new()
-	left_panel = get_node("CanvasLayer/VBoxContainer/MiddlePart/LeftPanel")
+	left_panel = get_node("../CanvasLayer/VBoxContainer/MiddlePart/LeftPanel")
 
 	add_child(main_ui)
 	add_child(update_ui)
@@ -35,8 +35,8 @@ func _ready():
 	dev_actions = DevActions.new()
 	
 	dev_actions.add_building_by_type("provider", tile_map, Vector2i(-3,1))
-	dev_actions.add_building_by_type("transformer", tile_map, Vector2i(0,1))
-	dev_actions.add_building_by_type("consumer", tile_map, Vector2i(3,1))
+	#dev_actions.add_building_by_type("transformer", tile_map, Vector2i(0,1))
+	#dev_actions.add_building_by_type("consumer", tile_map, Vector2i(3,1))
 	
 	left_panel.add_child(dev_actions)
 

@@ -3,6 +3,20 @@ class_name ControlUtil
 
 const resource_item_prototype = preload("res://scenes/resource_item.tscn")
 
+static func mouse_to_tile(node, camera):
+	var physical_size_y = tan(deg_to_rad(camera.fov/2))*(camera.position.z-node.position.z)
+	var scree_size = node.get_viewport().get_visible_rect().size
+	var part_of_screen = node.get_viewport().get_mouse_position()/scree_size
+	var part_of_rect = Vector2((part_of_screen.x-0.5)*2*scree_size.x/scree_size.y, (part_of_screen.y-0.5)*-2)
+	var physical_coordinates = part_of_rect * physical_size_y
+	return world_to_tile(physical_coordinates)
+
+static func world_to_tile(v):
+	return Vector2i(roundf(v.x), roundf(v.y))
+
+static func tile_to_world(v: Vector2i):
+	return Vector3(v.x, v.y, 0)
+
 static func create_resource_item(obj, sprite_name, update_method):
 	var resource_item = resource_item_prototype.instantiate()
 	obj.add_child(resource_item)

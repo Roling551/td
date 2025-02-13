@@ -3,6 +3,8 @@ class_name ConnectionsList
 
 var connections = {}
 
+const sprite_node_prefab = preload("res://scenes/sprite_node.tscn")
+
 func add_connetion(tile_1, tile_map_1, tile_coord_1, tile_2, tile_map_2, tile_coord_2):
 	if BuildingTile.is_tile_input(tile_1):
 		_add_connection_sorted(tile_2, tile_map_2, tile_coord_2, tile_1, tile_map_1, tile_coord_1)
@@ -16,8 +18,8 @@ func _add_connection_sorted(tile_o, tile_map_o, tile_coord_o, tile_i, tile_map_i
 	sprite_node.texture = sprite
 	sprite_node.scale = Vector2(0.5, 0.5)
 	tile_map_i.add_child(sprite_node)
-	var position_o = tile_to_world_position(tile_map_o, tile_coord_o)
-	var position_i = tile_to_world_position(tile_map_i, tile_coord_i)
+	var position_o = ControlUtil.tile_to_world(tile_coord_o)
+	var position_i = ControlUtil.tile_to_world(tile_coord_i)
 	sprite_node.position = position_o.lerp(position_i, 0.5)
 	sprite_node.region_enabled = true
 	sprite_node.texture_repeat = CanvasItem.TextureRepeat.TEXTURE_REPEAT_ENABLED
