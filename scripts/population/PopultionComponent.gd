@@ -18,12 +18,11 @@ func has_ui():
 func action():
 	pass
 
-func activate_ui(container_):
-	container = container_
+func activate_ui():
 	var c = ControlUtil.get_expanded_control()
-	container.add_child(c)
 	label = Label.new()
 	c.add_child(label)
+	return c
 
 func update_ui():
 	label.text = str(assigned_population_num,"/",max_population)

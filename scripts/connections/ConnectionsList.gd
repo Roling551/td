@@ -26,10 +26,6 @@ func _add_connection_sorted(tile_o, tile_map_o, tile_coord_o, tile_i, tile_map_i
 	sprite_node.pixel_size = 0.0156
 	var length = sqrt(pow(tile_coord_o.x-tile_coord_i.x,2) + pow(tile_coord_o.y-tile_coord_i.y,2))
 	sprite_node.region_rect = Rect2(0,0,64 * length,64)
-	print(position_o, position_i)
-	print(sprite_node.position)
-	print(sprite_node.rotation)
-	#print(position_o.direction_to(position_i))
 	
 	var rotation = Util.v3_to_v2(position_o).direction_to(Util.v3_to_v2(position_i)).angle()
 	

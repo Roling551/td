@@ -57,5 +57,4 @@ func delete_building(tile_map, tile_coord):
 
 func building_actions():
 	for building in buildings:
-		print(building)
 		building.action()

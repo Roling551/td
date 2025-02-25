@@ -24,7 +24,8 @@ func get_ui():
 	for name in building_components:
 		var component = building_components[name]
 		if component.has_ui():
-			component.activate_ui(item_list)
+			var c = component.activate_ui()
+			item_list.add_child(c)
 	update_ui()
 	return item_list
 

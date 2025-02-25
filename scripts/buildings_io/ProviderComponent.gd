@@ -9,4 +9,3 @@ func _init(_building, _output):
 	output = _output
 	building.functionalities["turn_action"] = func(): 
 		output.forward("test")
-
