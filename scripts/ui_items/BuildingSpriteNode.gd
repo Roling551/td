@@ -9,4 +9,4 @@ func _init(tiles):
 			var sprite_node = sprite_node_prefab.instantiate()
 			add_child(sprite_node)
 			sprite_node.position = ControlUtil.tile_to_world(tile["tile_coord"]) + Sprites.sprites_3d[tile["sprite_name"]]["offset"]
-			sprite_node.set_material(tile["sprite_name"])
+			sprite_node.set_material_by_name(tile["sprite_name"])

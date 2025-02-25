@@ -101,3 +101,6 @@ static func subtract_dictionaries(
 			pass
 		else:
 			lacking_values[key] = subtrahend[key]
+
+static func v3_to_v2(v3):
+	return Vector2(v3.x, v3.y)

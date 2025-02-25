@@ -15,7 +15,6 @@ func set_location_and_tiles(_location, _tiles):
 	location = _location
 
 func action():
-	print("test action")
 	if(functionalities.has("turn_action")):
 		functionalities["turn_action"].call()
 

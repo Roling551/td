@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d2b0jldpfokdn" path="res://sprites/building_sprites/chimney1.png" id="1_coe4n"]
 
 [resource]
+render_priority = -1
 transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("1_coe4n")
