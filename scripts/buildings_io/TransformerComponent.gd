@@ -4,6 +4,7 @@ class_name TransformerComponent
 var building
 var input: InputTile
 var output: OutputTile
+var output_payload
 
 var label
 
@@ -11,8 +12,13 @@ func _init(_building, _input, _output):
 	building = _building
 	input = _input
 	output = _output
-	building.functionalities["input_action"] = func(): 
-		output.forward(input.payload + "_a")
+	building.functionalities["input_action"] = func(actual):
+		if input.payload != null:
+			output_payload = input.payload + "_a"
+		else:
+			output_payload = null
+		output.forward(actual, output_payload)
+
 
 func has_ui():
 	return true
@@ -27,8 +33,11 @@ func activate_ui():
 	return c
 
 func update_ui():
-	label.text = str("test")
-	
+	if output_payload != null:
+		label.text = output_payload
+	else:
+		label.text = ""
+
 func _enter_tree():
 	MainScript.update_ui.add_updateable(self)
 

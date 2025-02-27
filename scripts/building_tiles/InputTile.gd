@@ -8,9 +8,9 @@ func _init(building):
 	super(building)
 	tile_type = TILE_TYPE.INPUT
 
-func forward(_payload):
+func forward(actual, _payload):
 	payload = _payload
-	building.building_components["input"].activate(self)
+	building.building_components["input"].activate(actual, self)
 
 func connect_tile(_output_tile, _connection):
 	connection = _connection

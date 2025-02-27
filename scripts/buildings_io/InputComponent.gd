@@ -16,8 +16,8 @@ func new_turn():
 		not_activated[input] = null
 	activated = {}
 	
-func activate(input):
+func activate(actual, input):
 	not_activated.erase(input)
 	activated[input]=null
 	if not_activated.is_empty():
-		building.functionalities["input_action"].call()
+		building.functionalities["input_action"].call(actual)
