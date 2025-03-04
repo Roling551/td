@@ -13,11 +13,13 @@ func connect_tile(_input_tile, _connection):
 	input_tile = _input_tile
 	connection = _connection
 	_forward(false, payload)
+	MainScript.update_ui.mark_for_update()
 	
 func unconnect():
 	_forward(false, null)
 	input_tile = null
 	connection = null
+	MainScript.update_ui.mark_for_update()
 	
 func forward(actual, _payload):
 	payload = _payload
