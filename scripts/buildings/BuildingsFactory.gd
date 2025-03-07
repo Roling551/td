@@ -17,6 +17,22 @@ var buildings_patterns = {
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
+		"transformer_x":{
+			"name": "t1",
+			"tiles": [
+				{"tile_coord": Vector2i(0,0), "sprite_name":"chimney"},
+				{"tile_coord": Vector2i(0,-1)},
+				{"tile_coord": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
+				{"tile_coord": Vector2i(2,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
+				{"tile_coord": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
+				{"tile_coord": Vector2i(2,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
+				
+			],
+			"components": {
+				"population": func(building): return PopulationComponent.new(MainScript.population_container),
+				"productivity": func(building): return ProductivityComponent.new(building)
+			}
+		},
 		"provider":{
 			"name": "t1",
 			"tiles": [
@@ -68,6 +84,9 @@ func get_building_and_tiles(type):
 		result_tile["tile_coord"]=tile["tile_coord"]
 		tiles.push_back(result_tile)
 	
+	if type=="transformer_x":
+		type = "transformer"
+	
 	if type=="transformer" || type=="consumer":
 		components["input"] = InputComponent.new(building, inputs)
 	
@@ -75,7 +94,7 @@ func get_building_and_tiles(type):
 		components["output"] = OutputComponent.new(building, outputs)
 
 	if type=="transformer":
-		components["transformer"] = TransformerComponent.new(building, inputs[0], outputs[0])
+		components["transformer"] = _get_basic_transformer(building, inputs, outputs)
 	
 	if type=="provider":
 		components["provider"] = ProviderComponent.new(building, outputs[0])
@@ -92,6 +111,40 @@ func get_building_and_tiles(type):
 		"building": building,
 		"tiles": tiles
 	}
+
+func _get_basic_transformer(building, _inputs, _outputs):
+	var inputs = []
+	for n in _inputs.size():
+		inputs.append(
+			{
+				"name": "i" + str(n),
+				"tile": _inputs[n]
+			}
+		)
+	var outputs = []
+	for n in _outputs.size():
+		outputs.append(
+			{
+			"name": "o" + str(n),
+			"tile": _outputs[n],
+			"payload": null
+			}
+		)
+	var transform_function = func(__inputs, __outputs):
+		var payload = __inputs.map(func(x): 
+			return x["tile"].payload
+		).reduce(func(accum, x):
+			if accum == null || x == null:
+				return null
+			else:
+				return accum + "_" + x
+		)
+		if payload:
+			payload = ("^"+payload)
+		__outputs[0]["payload"] = payload
+		
+	return TransformerComponent.new(building, inputs, outputs, transform_function)
+	
 
 func get_pre_build_info(type):
 	var pattern = buildings_patterns.get(type)

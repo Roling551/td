@@ -45,6 +45,7 @@ static func turn():
 	population_container.assign_population(buildings_map.buildings)
 	buildings_map.building_actions()
 	population_container.citizens_action()
+	buildings_map.new_turn()
 
 func _physics_process(delta):
 	pass

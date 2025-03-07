@@ -14,9 +14,13 @@ func set_location_and_tiles(_location, _tiles):
 	tiles = _tiles
 	location = _location
 
-func action():
-	if(functionalities.has("turn_action")):
-		functionalities["turn_action"].call()
+func init_pipe_action(actual):
+	if functionalities.has("init_pipes_action"):
+		functionalities["init_pipes_action"].call(actual)
+
+func before_pipe_action():
+	if building_components.has("input"):
+		building_components["input"].before_pipe_action()
 
 func get_ui():
 	item_list = HBoxContainer.new()

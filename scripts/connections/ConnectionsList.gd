@@ -31,7 +31,6 @@ func _add_connection_sorted(tile_o, tile_map_o, tile_coord_o, tile_i, tile_map_i
 	
 	sprite_node.rotation = Vector3(0,0,rotation)
 
-	print(sprite_node.rotation)
 	#sprite_node.rotation = position_o.direction_to(position_i)
 	
 	var connection = Connection.new(sprite_node, tile_o, [tile_map_o, tile_coord_o], tile_i, [tile_map_i, tile_coord_i])

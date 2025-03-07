@@ -2,23 +2,24 @@ extends BuildingComponent
 class_name TransformerComponent
 
 var building
-var input: InputTile
-var output: OutputTile
-var output_payload
+var inputs
+var outputs
+var transform_function
 
 var label
 
-func _init(_building, _input, _output):
+func _init(_building, _inputs, _outputs, _transform_function):
 	building = _building
-	input = _input
-	output = _output
+	inputs = _inputs
+	outputs = _outputs
+	transform_function = _transform_function
 	building.functionalities["input_action"] = func(actual):
-		if input.payload != null:
-			output_payload = input.payload + "_a"
-		else:
-			output_payload = null
-		output.forward(actual, output_payload)
+		transform_function.call(inputs, outputs)
+		_forward(actual)
 
+func _forward(actual):
+	for n in outputs.size():
+		outputs[n]["tile"].forward(actual, outputs[n]["payload"])
 
 func has_ui():
 	return true
@@ -33,10 +34,19 @@ func activate_ui():
 	return c
 
 func update_ui():
-	if output_payload != null:
-		label.text = output_payload
-	else:
-		label.text = ""
+	var text = ""
+	text += inputs.map(func(x): 
+		return x["tile"].payload
+	).reduce(func(accum, x):
+		return Util.val_or_def(accum, "null") + " + " + Util.val_or_def(x, "null")
+	)
+	text += " -> "
+	text += outputs.map(func(x): 
+		return x["tile"].payload
+	).reduce(func(accum, x):
+		return Util.val_or_def(accum, "null") + " + " + Util.val_or_def(x, "null")
+	)
+	label.text = text
 
 func _enter_tree():
 	MainScript.update_ui.add_updateable(self)

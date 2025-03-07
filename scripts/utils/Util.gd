@@ -104,3 +104,9 @@ static func subtract_dictionaries(
 
 static func v3_to_v2(v3):
 	return Vector2(v3.x, v3.y)
+	
+static func val_or_def(value, default):
+	if value != null:
+		return value
+	else:
+		return default

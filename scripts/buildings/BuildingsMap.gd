@@ -57,4 +57,12 @@ func delete_building(tile_map, tile_coord):
 
 func building_actions():
 	for building in buildings:
-		building.action()
+		building.before_pipe_action()
+	for building in buildings:
+		building.init_pipe_action(true)
+		
+func new_turn():
+	for building in buildings:
+		building.before_pipe_action()
+	for building in buildings:
+		building.init_pipe_action(false)

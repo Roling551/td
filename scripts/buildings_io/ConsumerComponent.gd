@@ -12,6 +12,7 @@ func _init(_building, _input):
 	building.functionalities["input_action"] = func(actual):
 		payload = input.payload
 		if actual:
+			print("consumer:")
 			print(input.payload)
 
 func has_ui():

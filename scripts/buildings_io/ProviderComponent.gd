@@ -11,8 +11,8 @@ func provide_payload():
 func _init(_building, _output):
 	building = _building
 	output = _output
-	building.functionalities["turn_action"] = func(): 
-		output.forward(true, provide_payload())
+	building.functionalities["init_pipes_action"] = func(actual): 
+		output.forward(actual, provide_payload())
 	output.forward(false, provide_payload())
 
 func has_ui():

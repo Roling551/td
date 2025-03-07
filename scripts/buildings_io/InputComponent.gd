@@ -3,21 +3,20 @@ class_name InputComponent
 
 var building
 var inputs
-var not_activated = {}
-var activated = {}
+var valid = {}
 
 func _init(_building, _inputs):
 	building = _building
 	inputs = _inputs
-	new_turn()
+	before_pipe_action()
 
-func new_turn():
+func before_pipe_action():
+	valid = {}
 	for input in inputs:
-		not_activated[input] = null
-	activated = {}
+		if !input.has_connection():
+			valid[input] = null
 	
-func activate(actual, input):
-	not_activated.erase(input)
-	activated[input]=null
-	if not_activated.is_empty():
+func activate_input(actual, input):
+	valid[input]=null
+	if valid.size() == inputs.size():
 		building.functionalities["input_action"].call(actual)
