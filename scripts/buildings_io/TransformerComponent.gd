@@ -35,17 +35,17 @@ func activate_ui():
 
 func update_ui():
 	var text = ""
-	text += inputs.map(func(x): 
+	text += Util.val_or_def(inputs.map(func(x): 
 		return x["tile"].payload
 	).reduce(func(accum, x):
-		return Util.val_or_def(accum, "null") + " + " + Util.val_or_def(x, "null")
-	)
-	text += " -> "
-	text += outputs.map(func(x): 
+		return Util.val_or_def(accum, "<null>") + " + " + Util.val_or_def(x, "<null>")
+	), "<null>")
+	text += "   ->   "
+	text += Util.val_or_def(outputs.map(func(x): 
 		return x["tile"].payload
 	).reduce(func(accum, x):
-		return Util.val_or_def(accum, "null") + " + " + Util.val_or_def(x, "null")
-	)
+		return Util.val_or_def(accum, "<null>") + " + " + Util.val_or_def(x, "<null>")
+	), "<null>")
 	label.text = text
 
 func _enter_tree():

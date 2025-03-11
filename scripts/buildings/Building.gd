@@ -14,6 +14,10 @@ func set_location_and_tiles(_location, _tiles):
 	tiles = _tiles
 	location = _location
 
+func end_turn_action():
+	if functionalities.has("end_turn_action"):
+		functionalities["end_turn_action"].call()
+
 func init_pipe_action(actual):
 	if functionalities.has("init_pipes_action"):
 		functionalities["init_pipes_action"].call(actual)

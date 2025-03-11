@@ -65,4 +65,6 @@ func new_turn():
 	for building in buildings:
 		building.before_pipe_action()
 	for building in buildings:
+		building.end_turn_action()
+	for building in buildings:
 		building.init_pipe_action(false)
