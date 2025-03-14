@@ -47,10 +47,4 @@ func update_ui():
 		return Util.val_or_def(accum, "<null>") + " + " + Util.val_or_def(x, "<null>")
 	), "<null>")
 	label.text = text
-
-func _enter_tree():
-	MainScript.update_ui.add_updateable(self)
-
-func _exit_tree():
-	MainScript.update_ui.remove_updateable(self)
 	

@@ -32,9 +32,3 @@ func update_ui():
 		label.text = payload
 	else:
 		label.text = ""
-
-func _enter_tree():
-	MainScript.update_ui.add_updateable(self)
-
-func _exit_tree():
-	MainScript.update_ui.remove_updateable(self)

@@ -47,9 +47,3 @@ func assign_population(group_part):
 	else:
 		assigned_group_parts[group] = group_part
 	set_assigned_population_num()
-
-func _enter_tree():
-	MainScript.update_ui.add_updateable(self)
-
-func _exit_tree():
-	MainScript.update_ui.remove_updateable(self)

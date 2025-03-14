@@ -27,7 +27,9 @@ func before_pipe_action():
 		building_components["input"].before_pipe_action()
 
 func get_ui():
+	var updateable_wrap = UpdateableWrap.new(self)
 	item_list = HBoxContainer.new()
+	updateable_wrap.add_child(item_list)
 	ControlUtil.set_anchor_full_rect(item_list)
 	for name in building_components:
 		var component = building_components[name]
@@ -35,7 +37,7 @@ func get_ui():
 			var c = component.activate_ui()
 			item_list.add_child(c)
 	update_ui()
-	return item_list
+	return updateable_wrap
 
 func update_ui():
 	for name in building_components:

@@ -45,16 +45,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_fmks5")
 
-[node name="TimeContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("2_0nlaa")
-
 [node name="PopulationContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer" node_paths=PackedStringArray("resource_container")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_1t2kl")
 resource_container = NodePath("../ResourcesContainer")
+
+[node name="TimeContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_0nlaa")
 
 [node name="MiddlePart" type="Control" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
