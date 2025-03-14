@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnfku45f0iw0b"]
+[gd_scene load_steps=2 format=3 uid="uid://cnfku45f0iw0b"]
 
 [ext_resource type="Script" path="res://scripts/main/MainScript.gd" id="1_eesk1"]
-[ext_resource type="Script" path="res://scripts/resources/ResourcesContainer.gd" id="1_fmks5"]
-[ext_resource type="Script" path="res://scripts/TimeContainer.gd" id="2_0nlaa"]
-[ext_resource type="Script" path="res://scripts/population/PopulationContainer.gd" id="3_1t2kl"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -32,29 +29,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel"]
+[node name="SystemsUi" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ResourcesContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("1_fmks5")
-
-[node name="PopulationContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer" node_paths=PackedStringArray("resource_container")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("3_1t2kl")
-resource_container = NodePath("../ResourcesContainer")
-
-[node name="TimeContainer" type="VFlowContainer" parent="CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("2_0nlaa")
 
 [node name="MiddlePart" type="Control" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2

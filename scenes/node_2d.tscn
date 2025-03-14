@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/main/MainScript.gd" id="1_w0nsv"]
 [ext_resource type="Texture2D" uid="uid://dsou7ljdrjpfg" path="res://sprites/ground.png" id="2_hwf8a"]
-[ext_resource type="Script" path="res://scripts/resources/ResourcesContainer.gd" id="3_w1hks"]
-[ext_resource type="Script" path="res://scripts/TimeContainer.gd" id="5_4l5ov"]
-[ext_resource type="Script" path="res://scripts/population/PopulationContainer.gd" id="5_x05rl"]
+[ext_resource type="Script" path="res://scripts/resources/ResourcesSystem.gd" id="3_w1hks"]
+[ext_resource type="Script" path="res://scripts/TurnSystem.gd" id="5_4l5ov"]
+[ext_resource type="Script" path="res://scripts/population/PopulationSystem.gd" id="5_x05rl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5avdr"]
 texture = ExtResource("2_hwf8a")

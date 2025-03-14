@@ -2,8 +2,9 @@ extends Node
 class_name MainScript
 
 static var resources_container : Node
-static var population_container : Node
-static var time_container : Node
+static var population_system = PopulationSystem.new()
+static var turn_system = TurnSystem.new()
+static var resources_system = ResourcesSystem.new()
 static var active_panel : Node
 static var left_panel : Node
 static var tile_map
@@ -15,14 +16,16 @@ static var connections_list
 static var main_ui
 static var update_ui = UpdateUI.new()
 static var dev_actions
+static var systems_ui
 
 func _ready():
+	systems_ui = get_node("../CanvasLayer/VBoxContainer/UpperPanel/Panel/SystemsUi")
 	active_panel = get_node("../CanvasLayer/VBoxContainer/BottomPanel/Panel")
 	tile_map = get_node("../TileMap")
 	camera = get_node("../Camera")
-	resources_container = get_node("../CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/ResourcesContainer")
-	population_container = get_node("../CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/PopulationContainer")
-	time_container = get_node("../CanvasLayer/VBoxContainer/UpperPanel/Panel/HBoxContainer/TimeContainer")
+	systems_ui.add_child(resources_system.get_ui())
+	systems_ui.add_child(population_system.get_ui())
+	systems_ui.add_child(turn_system.get_ui())
 	tile_map_actions = TileMapActions.new(camera)
 	building_factory = BuildingsFactory.new()
 	connections_list = ConnectionsList.new()
@@ -41,10 +44,8 @@ func _ready():
 	left_panel.add_child(dev_actions)
 
 static func turn():
-	time_container.proceed_turn()
-	population_container.assign_population(buildings_map.buildings)
+	turn_system.proceed_turn()
 	buildings_map.building_actions()
-	population_container.citizens_action()
 	buildings_map.new_turn()
 
 func _physics_process(delta):

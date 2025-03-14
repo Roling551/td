@@ -17,7 +17,7 @@ static func world_to_tile(v):
 static func tile_to_world(v: Vector2i):
 	return Vector3(v.x, v.y, 0)
 
-static func create_resource_item(obj, sprite_name, update_method):
+static func create_resource_item_and_add(obj, sprite_name, update_method):
 	var resource_item = resource_item_prototype.instantiate()
 	obj.add_child(resource_item)
 	resource_item._set_icon(Sprites.sprites[sprite_name])

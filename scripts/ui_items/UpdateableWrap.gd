@@ -5,6 +5,7 @@ var updateable
 
 func _init(_updateable) -> void:
 	ControlUtil.set_anchor_full_rect(self)
+	ControlUtil.expand_control(self)
 	updateable = _updateable
 
 func _enter_tree():

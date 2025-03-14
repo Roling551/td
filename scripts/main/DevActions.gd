@@ -15,7 +15,7 @@ var buttons = [
 var pre_build_info
 
 func change_population(change):
-	MainScript.population_container.change_population(change)
+	MainScript.population_system.change_population(change)
 
 func set_add_building_action(pre_build_info):
 	MainScript.main_ui.set_action(

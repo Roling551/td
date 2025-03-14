@@ -13,7 +13,7 @@ var buildings_patterns = {
 				{"tile_coord": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(MainScript.population_container),
+				"population": func(building): return PopulationComponent.new(),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
@@ -29,7 +29,7 @@ var buildings_patterns = {
 				
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(MainScript.population_container),
+				"population": func(building): return PopulationComponent.new(),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
@@ -41,7 +41,7 @@ var buildings_patterns = {
 				{"tile_coord": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(MainScript.population_container),
+				"population": func(building): return PopulationComponent.new(),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
@@ -53,7 +53,7 @@ var buildings_patterns = {
 				{"tile_coord": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(MainScript.population_container),
+				"population": func(building): return PopulationComponent.new(),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},

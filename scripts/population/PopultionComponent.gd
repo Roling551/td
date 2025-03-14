@@ -1,16 +1,14 @@
 extends Node
 class_name PopulationComponent
 
-var population_container
-
 var container
 var label
 var max_population = 10
 var assigned_group_parts = {}
 var assigned_population_num = 0
 
-func _init(_population_container):
-	population_container = _population_container
+func _init():
+	pass
 
 func has_ui():
 	return true
