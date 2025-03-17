@@ -8,3 +8,6 @@ func _init(_building: Building):
 
 func has_ui():
 	return false
+
+func before_delete():
+	pass

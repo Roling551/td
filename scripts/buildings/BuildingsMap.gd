@@ -44,6 +44,7 @@ func delete_building(tile_map, tile_coord):
 		return
 	var building = selected_tile.building
 	
+	building.before_delete()
 	buildings[building].queue_free()
 	buildings.erase(building)
 	if building.building_components.has("input"):

@@ -24,11 +24,16 @@ func activate_ui():
 	return c
 
 func update():
+	var needed_previously = population_needed
 	if building.building_components["pipe"].is_turned_on():
 		population_needed = max_population_needed
 	else:
 		population_needed = 0
+	MainScript.population_system.change_populaion_needed(population_needed - needed_previously)
 	MainScript.update_ui.mark_for_update()
 
 func update_ui():
 	label.text = "workers: " + str(population_needed) + " / " + str(max_population_needed)
+	
+func before_delete():
+	MainScript.population_system.change_populaion_needed(-max_population_needed)

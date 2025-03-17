@@ -49,3 +49,7 @@ func update_ui():
 func update_components(updating_component):
 	for component in update_relations.get_array(updating_component):
 		component.update()
+
+func before_delete():
+	for name in building_components:
+		building_components[name].before_delete()
