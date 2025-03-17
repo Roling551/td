@@ -1,13 +1,12 @@
-extends BuildingComponent
+extends PipeComponent
 class_name ConsumerComponent
 
-var building
 var input: InputTile
 var payload
 var label
 
-func _init(_building, _input):
-	building = _building
+func _init(building, _input):
+	super(building)
 	input = _input
 	building.functionalities["input_action"] = func(actual):
 		payload = input.payload

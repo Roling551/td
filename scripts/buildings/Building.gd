@@ -6,6 +6,7 @@ var building_components
 var functionalities = {}
 var item_list
 var tiles
+var update_relations = OneToMany.new()
 
 func _init(building_components_):
 	building_components = building_components_
@@ -44,3 +45,7 @@ func update_ui():
 		var component = building_components[name]
 		if component.has_ui():
 			component.update_ui()
+
+func update_components(updating_component):
+	for component in update_relations.get_array(updating_component):
+		component.update()

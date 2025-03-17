@@ -1,21 +1,25 @@
-extends BuildingComponent
+extends PipeComponent
 class_name TransformerComponent
 
-var building
 var inputs
 var outputs
 var transform_function
+var turned_on = false
 
 var label
 
-func _init(_building, _inputs, _outputs, _transform_function):
-	building = _building
+func _init(building, _inputs, _outputs, _transform_function):
+	super(building)
 	inputs = _inputs
 	outputs = _outputs
 	transform_function = _transform_function
 	building.functionalities["input_action"] = func(actual):
-		transform_function.call(inputs, outputs)
+		turned_on = transform_function.call(inputs, outputs)
+		building.update_components(self)
 		_forward(actual)
+
+func is_turned_on():
+	return turned_on
 
 func _forward(actual):
 	for n in outputs.size():

@@ -1,12 +1,11 @@
 extends BuildingComponent
 class_name InputComponent
 
-var building
 var inputs
 var valid = {}
 
-func _init(_building, _inputs):
-	building = _building
+func _init(building, _inputs):
+	super(building)
 	inputs = _inputs
 	before_pipe_action()
 

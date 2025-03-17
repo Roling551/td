@@ -13,7 +13,7 @@ var buildings_patterns = {
 				{"tile_coord": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(),
+				"population": func(building): return PopulationComponent.new(building),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
@@ -29,7 +29,7 @@ var buildings_patterns = {
 				
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(),
+				"population": func(building): return PopulationComponent.new(building),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
@@ -41,7 +41,7 @@ var buildings_patterns = {
 				{"tile_coord": Vector2i(1,-1), "sprite_name":"output", "type":BuildingTile.TILE_TYPE.OUTPUT},
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(),
+				"population": func(building): return PopulationComponent.new(building),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
@@ -53,7 +53,7 @@ var buildings_patterns = {
 				{"tile_coord": Vector2i(1,0), "sprite_name":"input", "type":BuildingTile.TILE_TYPE.INPUT},
 			],
 			"components": {
-				"population": func(building): return PopulationComponent.new(),
+				"population": func(building): return PopulationComponent.new(building),
 				"productivity": func(building): return ProductivityComponent.new(building)
 			}
 		},
@@ -94,13 +94,13 @@ func get_building_and_tiles(type):
 		components["output"] = OutputComponent.new(building, outputs)
 
 	if type=="transformer":
-		components["transformer"] = _get_basic_transformer(building, inputs, outputs)
+		components["pipe"] = _get_basic_transformer(building, inputs, outputs)
 	
 	if type=="provider":
-		components["provider"] = ProviderComponent.new(building, outputs[0])
+		components["pipe"] = ProviderComponent.new(building, outputs[0])
 	
 	if type=="consumer":
-		components["consumer"] = ConsumerComponent.new(building, inputs[0])
+		components["pipe"] = ConsumerComponent.new(building, inputs[0])
 
 	
 
@@ -142,6 +142,7 @@ func _get_basic_transformer(building, _inputs, _outputs):
 		if payload:
 			payload = ("^"+payload)
 		__outputs[0]["payload"] = payload
+		return payload != null
 		
 	return TransformerComponent.new(building, inputs, outputs, transform_function)
 	

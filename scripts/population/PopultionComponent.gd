@@ -1,14 +1,15 @@
-extends Node
+extends BuildingComponent
 class_name PopulationComponent
 
 var container
 var label
-var max_population = 10
-var assigned_group_parts = {}
-var assigned_population_num = 0
+var population_needed = 0
+var max_population_needed = 10
 
-func _init():
-	pass
+func _init(building : Building):
+	super(building)
+	building.update_relations.add(building.building_components["pipe"], self)
+	update()
 
 func has_ui():
 	return true
@@ -22,26 +23,12 @@ func activate_ui():
 	c.add_child(label)
 	return c
 
-func update_ui():
-	label.text = str(assigned_population_num,"/",max_population)
-
-func set_assigned_population_num():
-	var population_num = 0
-	for group in assigned_group_parts:
-		population_num += assigned_group_parts[group].population
-	assigned_population_num = population_num
-
-func get_wanted_population():
-	return max_population
-
-func reset_population():
-	assigned_group_parts = {}
-	set_assigned_population_num()
-
-func assign_population(group_part):
-	var group = group_part
-	if assigned_group_parts.has(group):
-		assigned_group_parts[group].add(group_part)
+func update():
+	if building.building_components["pipe"].is_turned_on():
+		population_needed = max_population_needed
 	else:
-		assigned_group_parts[group] = group_part
-	set_assigned_population_num()
+		population_needed = 0
+	MainScript.update_ui.mark_for_update()
+
+func update_ui():
+	label.text = "workers: " + str(population_needed) + " / " + str(max_population_needed)
