@@ -23,7 +23,7 @@ func is_turned_on():
 
 func _forward(actual):
 	for n in outputs.size():
-		outputs[n]["tile"].forward(actual, outputs[n]["payload"])
+		outputs[n]["tile"].forward(actual, outputs[n]["tile"].payload)
 
 func has_ui():
 	return true
@@ -39,16 +39,15 @@ func activate_ui():
 
 func update_ui():
 	var text = ""
-	text += Util.val_or_def(inputs.map(func(x): 
-		return x["tile"].payload
+	text += Util.val_or_def(inputs.map(func(x):
+		return Util.func_if_not_null(x["tile"].payload, func(x): return x.get_text())
 	).reduce(func(accum, x):
 		return Util.val_or_def(accum, "<null>") + " + " + Util.val_or_def(x, "<null>")
 	), "<null>")
 	text += "   ->   "
-	text += Util.val_or_def(outputs.map(func(x): 
-		return x["tile"].payload
+	text += Util.val_or_def(outputs.map(func(x):
+		return Util.func_if_not_null(x["tile"].payload, func(x): return x.get_text())
 	).reduce(func(accum, x):
 		return Util.val_or_def(accum, "<null>") + " + " + Util.val_or_def(x, "<null>")
 	), "<null>")
 	label.text = text
-	

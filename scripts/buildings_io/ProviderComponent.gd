@@ -3,16 +3,15 @@ class_name ProviderComponent
 
 var output: OutputTile
 var label
-var provided_payload = "test"
+var provided_payload
 
 func provide_payload():
 	return provided_payload
 
-func _init(building, _output):
+func _init(building, _output, _provided_payload):
 	super(building)
+	provided_payload = _provided_payload
 	output = _output
-	building.functionalities["end_turn_action"] = func():
-		provided_payload += ">"
 	building.functionalities["init_pipes_action"] = func(actual): 
 		output.forward(actual, provide_payload())
 	output.forward(false, provide_payload())
@@ -30,4 +29,4 @@ func activate_ui():
 	return c
 
 func update_ui():
-		label.text = provide_payload()
+	label.text = provide_payload().get_text()

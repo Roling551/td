@@ -12,7 +12,7 @@ func _init(building, _input):
 		payload = input.payload
 		if actual:
 			print("consumer:")
-			print(input.payload)
+			print(input.payload.get_text())
 
 func has_ui():
 	return true
@@ -28,6 +28,6 @@ func activate_ui():
 
 func update_ui():
 	if payload != null:
-		label.text = payload
+		label.text = payload.get_text()
 	else:
 		label.text = ""

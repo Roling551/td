@@ -110,3 +110,9 @@ static func val_or_def(value, default):
 		return value
 	else:
 		return default
+		
+static func func_if_not_null(value, funcion):
+	if value != null:
+		return funcion.call(value)
+	else:
+		return null;

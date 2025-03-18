@@ -93,7 +93,7 @@ func get_building_and_tiles(type):
 		components["pipe"] = _get_basic_transformer(building, inputs, outputs)
 	
 	if type=="provider":
-		components["pipe"] = ProviderComponent.new(building, outputs[0])
+		components["pipe"] = ProviderComponent.new(building, outputs[0], Payload.new("water",1.0))
 	
 	if type=="consumer":
 		components["pipe"] = ConsumerComponent.new(building, inputs[0])
@@ -121,23 +121,15 @@ func _get_basic_transformer(building, _inputs, _outputs):
 	for n in _outputs.size():
 		outputs.append(
 			{
-			"name": "o" + str(n),
-			"tile": _outputs[n],
-			"payload": null
+				"name": "o" + str(n),
+				"tile": _outputs[n]
 			}
 		)
 	var transform_function = func(__inputs, __outputs):
-		var payload = __inputs.map(func(x): 
-			return x["tile"].payload
-		).reduce(func(accum, x):
-			if accum == null || x == null:
-				return null
-			else:
-				return accum + "_" + x
-		)
-		if payload:
-			payload = ("^"+payload)
-		__outputs[0]["payload"] = payload
+		var payload = null
+		if __inputs[0]["tile"].payload.substance == "water":
+			payload = Payload.new("algae", __inputs[0]["tile"]["payload"].amount)
+		__outputs[0]["tile"].payload = payload
 		return payload != null
 		
 	return TransformerComponent.new(building, inputs, outputs, transform_function)
