@@ -23,11 +23,19 @@ func get_ui():
 func update_ui():
 	resource_item.update()
 
+func check_if_sufficient():
+	if population_needed > population_number:
+		MainScript.turn_system.add_error(self, "Not enough workers")
+	else:
+		MainScript.turn_system.remove_error(self)
+
 func change_populaion_needed(needed_change):
 	population_needed += needed_change
+	check_if_sufficient()
 	MainScript.update_ui.mark_for_update()
 	
 func change_population(population_change):
 	population_number += population_change
+	check_if_sufficient()
 	MainScript.update_ui.mark_for_update()
 	

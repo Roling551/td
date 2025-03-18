@@ -3,7 +3,7 @@ class_name MainScript
 
 static var resources_container : Node
 static var population_system = PopulationSystem.new()
-static var turn_system = TurnSystem.new()
+static var turn_system = TurnSystem.new(new_turn)
 static var resources_system = ResourcesSystem.new()
 static var active_panel : Node
 static var left_panel : Node
@@ -43,8 +43,7 @@ func _ready():
 	
 	left_panel.add_child(dev_actions)
 
-static func turn():
-	turn_system.proceed_turn()
+static func new_turn():
 	buildings_map.building_actions()
 	buildings_map.new_turn()
 

@@ -2,7 +2,6 @@ extends VBoxContainer
 class_name DevActions
 
 var buttons = [
-	ActionButton.new("Turn", func(): MainScript.turn()),
 	ActionButton.new("Increase population", func(): change_population(10)),
 	ActionButton.new("Decrease population", func(): change_population(-10)),
 	ActionButton.new("Add building", func(): set_add_building_action(MainScript.building_factory.get_pre_build_info("transformer"))),
