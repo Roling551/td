@@ -127,7 +127,7 @@ func _get_basic_transformer(building, _inputs, _outputs):
 		)
 	var transform_function = func(__inputs, __outputs):
 		var payload = null
-		if __inputs[0]["tile"].payload.substance == "water":
+		if __inputs[0]["tile"].payload && __inputs[0]["tile"].payload.resource == "water":
 			payload = Payload.new("algae", __inputs[0]["tile"]["payload"].amount)
 		__outputs[0]["tile"].payload = payload
 		return payload != null

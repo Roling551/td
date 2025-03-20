@@ -1,12 +1,12 @@
 extends Node
 class_name Payload
 
-var substance
+var resource
 var amount
 
-func _init(_substance, _amount):
-	substance = _substance
+func _init(_resource, _amount):
+	resource = _resource
 	amount = _amount
 	
 func get_text():
-	return substance + ": " + str(amount)
+	return resource + ": " + str(amount)

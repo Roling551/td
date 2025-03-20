@@ -10,6 +10,8 @@ func _init(building, _input):
 	input = _input
 	building.functionalities["input_action"] = func(actual):
 		payload = input.payload
+		if payload.resource == "algae":
+			MainScript.resources_system.update_resource(self, "food", payload.amount, actual)
 		if actual:
 			print("consumer:")
 			print(input.payload.get_text())
